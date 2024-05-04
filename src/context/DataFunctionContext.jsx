@@ -15,8 +15,7 @@ export const DataFunctionContextProvider = ({ children }) => {
     setDocId,
     partName,
     setIsError,
-    setIsPrdTimeBlank,
-    setIsPrdDateBlank,
+    setIsValueError,
     productionDate,
     productionTime,
     setIsTab1Active,
@@ -91,45 +90,45 @@ export const DataFunctionContextProvider = ({ children }) => {
       cav2Tms2: cav2Tms2,
     };
     let data;
-    if (!productionDate) {
-      setIsPrdDateBlank(true);
-    } else if (!productionTime) {
-      setIsPrdTimeBlank(true);
-    } else {
-      if (partName === "Knob Manual L 1 st") {
-        if (
-          cav1pg >= 3.05 &&
-          cav1pg <= 3.11 &&
-          cav2pg >= 3.05 &&
-          cav2pg <= 3.11 &&
-          cav1Tms1 >= 3.75 &&
-          cav1Tms1 <= 3.85 &&
-          cav2Tms1 >= 3.75 &&
-          cav2Tms1 <= 3.85 &&
-          cav1Tms2 >= 17.1 &&
-          cav1Tms2 <= 17.2 &&
-          cav2Tms2 >= 17.1 &&
-          cav2Tms2 <= 17.2
-        ) {
-          data = KnobManL1st;
-        } else {
-          setIsError(true);
-        }
-        try {
-          setIsBtnAddLoading(true);
-          const response = await axios.post("/api/data/addData", data);
-          const { docId } = response.data;
-          setDocId(docId);
-          setIsPrdDateBlank(false);
-          setIsPrdTimeBlank(false);
-          setIsError(false);
-          await getAllData();
-          setIsBtnAddLoading(false);
-        } catch (error) {
-          setIsBtnAddLoading(false);
-          console.log(error);
-        }
+    if (partName === "Knob Manual L 1 st" && productionDate && productionTime) {
+      if (
+        cav1pg >= 3.05 &&
+        cav1pg <= 3.11 &&
+        cav2pg >= 3.05 &&
+        cav2pg <= 3.11 &&
+        cav1Tms1 >= 3.75 &&
+        cav1Tms1 <= 3.85 &&
+        cav2Tms1 >= 3.75 &&
+        cav2Tms1 <= 3.85 &&
+        cav1Tms2 >= 17.1 &&
+        cav1Tms2 <= 17.2 &&
+        cav2Tms2 >= 17.1 &&
+        cav2Tms2 <= 17.2
+      ) {
+        data = KnobManL1st;
+      } else {
+        setIsValueError(true);
       }
+    } else {
+      setIsError(true);
+    }
+
+    if (data) {
+      try {
+        setIsBtnAddLoading(true);
+        const response = await axios.post("/api/data/addData", data);
+        const { docId } = response.data;
+        setDocId(docId);
+        setIsValueError(false);
+        setIsError(false);
+        await getAllData();
+        setIsBtnAddLoading(false);
+      } catch (error) {
+        setIsBtnAddLoading(false);
+        console.log(error);
+      }
+    } else {
+      console.log("Failed to hit API!");
     }
   };
 

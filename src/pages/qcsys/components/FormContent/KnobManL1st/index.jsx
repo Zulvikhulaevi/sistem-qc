@@ -1,7 +1,7 @@
 import { useAllStateContext } from "@/context/AllStateContext";
 
 const KnobManL1stFormContent = (props) => {
-  const { isError } = useAllStateContext();
+  const { isValueError } = useAllStateContext();
 
   return (
     <>
@@ -81,7 +81,7 @@ const KnobManL1stFormContent = (props) => {
           </div>
         </label>
       </div>
-      {isError ? (
+      {isValueError ? (
         <div className="w-full border border-red-500 bg-error rounded-lg mt-8 p-3">
           <p className="text-center text-sm text-white">
             Periksa kembali hasil pengukuran!

@@ -1,4 +1,4 @@
-import FormView from "./views/formView";
+import FormView from "./views/FormView";
 import DataView from "./views/DataView";
 import { useEffect } from "react";
 import { useDataFunctionContext } from "@/context/DataFunctionContext";

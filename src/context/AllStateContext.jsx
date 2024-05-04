@@ -12,8 +12,7 @@ export const AllStateContextProvider = ({ children }) => {
   const [productionTime, setProductionTime] = useState("");
 
   const [isError, setIsError] = useState(false);
-  const [isPrdDateBlank, setIsPrdDateBlank] = useState(false);
-  const [isPrdTimeBlank, setIsPrdTimeBlank] = useState(false);
+  const [isValueError, setIsValueError] = useState(false);
 
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
@@ -56,10 +55,8 @@ export const AllStateContextProvider = ({ children }) => {
     setDocId,
     isError,
     setIsError,
-    isPrdDateBlank,
-    setIsPrdDateBlank,
-    isPrdTimeBlank,
-    setIsPrdTimeBlank,
+    isValueError,
+    setIsValueError,
     isModalDetailOpen,
     setIsModalDetailOpen,
     isModalDeleteOpen,

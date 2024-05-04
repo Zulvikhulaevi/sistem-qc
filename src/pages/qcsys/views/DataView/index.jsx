@@ -9,13 +9,7 @@ const DataView = () => {
     if (partName === "Knob Manual L 1 st") {
       return <KnobManL1stData />;
     } else {
-      return (
-        <div className="container w-full">
-          <div className="flex h-96 items-center justify-center">
-            <p>Pilih Part!</p>
-          </div>
-        </div>
-      );
+      return null;
     }
   };
 

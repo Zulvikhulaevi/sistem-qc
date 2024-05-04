@@ -50,16 +50,10 @@ const KnobManL1stData = () => {
         </thead>
         <tbody>
           <tr>
-            <td
-              className="text-center border "
-              rowSpan={2}
-              style={{ width: "10%" }}>
-              3.08 +/- 0.03
+            <td className="border " rowSpan={2} style={{ width: "10%" }}>
+              17.<span className="ms-4">3.08 +/- 0.03</span>
             </td>
-            <td
-              className="text-center border "
-              rowSpan={2}
-              style={{ width: "10%" }}>
+            <td className="text-center border " rowSpan={2}>
               PG
             </td>
             <td className="text-center border " style={{ width: "15%" }}>
