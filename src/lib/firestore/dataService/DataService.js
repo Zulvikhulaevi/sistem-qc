@@ -7,7 +7,6 @@ import {
   getDocs,
   getFirestore,
   serverTimestamp,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import app from "../init";
@@ -23,9 +22,9 @@ export async function addData(
   data
 ) {
   try {
-    let formattedData;
+    let measurementData;
     if (partName === "Knob Manual L 1 st") {
-      formattedData = {
+      measurementData = {
         pointPg: data.pointPg,
         pointTms1: data.pointTms1,
         pointTms2: data.pointTms2,
@@ -52,7 +51,7 @@ export async function addData(
       productionDate: productionDate,
       productionTime: productionTime,
       date: serverTimestamp(),
-      result: formattedData,
+      result: measurementData,
     });
     return snapshot;
   } catch (error) {

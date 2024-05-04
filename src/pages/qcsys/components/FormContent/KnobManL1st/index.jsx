@@ -1,18 +1,11 @@
 import { useAllStateContext } from "@/context/AllStateContext";
 
-const AddDataForm = (props) => {
-  const {
-    pointPg,
-    setPointPg,
-    pointTms1,
-    setPointTms1,
-    pointTms2,
-    setPointTms2,
-    isError,
-  } = useAllStateContext();
+const KnobManL1stFormContent = (props) => {
+  const { isError } = useAllStateContext();
 
   return (
-    <div>
+    <>
+      {props.title}
       <div>
         <label className="form-control w-full">
           <div className="label">
@@ -25,9 +18,9 @@ const AddDataForm = (props) => {
             <input
               type="number"
               placeholder="Point"
-              value={pointPg}
-              onChange={(e) => setPointPg(e.target.value)}
-              className="input input-sm input-bordered w-1/2"
+              value={props.pointPgValue}
+              onChange={props.setPointPgValue}
+              className="input input-sm input-bordered w-1/4"
             />
             <input
               type="number"
@@ -48,11 +41,11 @@ const AddDataForm = (props) => {
           </div>
           <div className="flex">
             <input
-              type="text"
+              type="number"
               placeholder="Point"
-              value={pointTms1}
-              onChange={(e) => setPointTms1(e.target.value)}
-              className="input input-sm input-bordered w-1/2"
+              value={props.pointTms1Value}
+              onChange={props.setPointTms1Value}
+              className="input input-sm input-bordered w-1/4"
             />
             <input
               type="number"
@@ -73,14 +66,14 @@ const AddDataForm = (props) => {
           </div>
           <div className="flex">
             <input
-              type="text"
+              type="number"
               placeholder="Point"
-              value={pointTms2}
-              onChange={(e) => setPointTms2(e.target.value)}
-              className="input input-sm input-bordered w-1/2"
+              value={props.pointTms2Value}
+              onChange={props.setPointTms2Value}
+              className="input input-sm input-bordered w-1/4"
             />
             <input
-              type="text"
+              type="number"
               value={props.tms2Value}
               onChange={props.setTms2Value}
               className="input input-sm input-bordered w-full ms-2"
@@ -97,8 +90,8 @@ const AddDataForm = (props) => {
       ) : (
         ""
       )}
-    </div>
+    </>
   );
 };
 
-export default AddDataForm;
+export default KnobManL1stFormContent;

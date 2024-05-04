@@ -1,13 +1,12 @@
 import FormView from "./views/formView";
 import DataView from "./views/DataView";
-import Container from "@/components/Layout/Container";
 import { useEffect } from "react";
 import { useDataFunctionContext } from "@/context/DataFunctionContext";
 import { useSession } from "next-auth/react";
 
 const QcSys = () => {
   const { data: session } = useSession();
-  const { getLastDoc, getAllData } = useDataFunctionContext();
+  const { getAllData } = useDataFunctionContext();
 
   useEffect(() => {
     getAllData();
@@ -16,14 +15,10 @@ const QcSys = () => {
 
   return (
     <div className="mt-3">
-      <Container
-        content={
-          <>
-            <FormView />
-            <DataView />
-          </>
-        }
-      />
+      <div className="flex w-full">
+        <FormView />
+        <DataView />
+      </div>
     </div>
   );
 };

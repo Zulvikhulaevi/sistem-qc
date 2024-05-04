@@ -1,41 +1,13 @@
 import { useAllStateContext } from "@/context/AllStateContext";
 import { useDataFunctionContext } from "@/context/DataFunctionContext";
-import { useEffect } from "react";
-import ModalFormDetail from "../../ModalFormDetail";
-import ModalDelete from "../../ModalDelete";
+import ModalDelete from "@/pages/qcsys/components/Modal/ModalDelete";
+import ModalFormDetail from "@/pages/qcsys/components/Modal/ModalFormDetail";
 
-const DataTable = () => {
-  const {
-    partName,
-    characteristicValue,
-    setCharacteristicValue,
-    toolValue,
-    setToolValue,
-    allData,
-    isModalDetailOpen,
-    isModalDeleteOpen,
-  } = useAllStateContext();
+const KnobManL1stData = () => {
+  const { allData, isModalDetailOpen, isModalDeleteOpen } =
+    useAllStateContext();
 
   const { getDataById } = useDataFunctionContext();
-
-  useEffect(() => {
-    getPartValue();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partName]);
-
-  const getPartValue = () => {
-    if (partName === "Knob Manual L 1 st") {
-      setCharacteristicValue([
-        "3.08 +/- 0.03",
-        "3.8 +/- 0.05",
-        "17.15 +/- 0.05",
-      ]);
-      setToolValue(["PG", "TMS", "TMS"]);
-    } else {
-      setCharacteristicValue(["-", "-", "-"]);
-      setToolValue(["-", "-", "-"]);
-    }
-  };
 
   return (
     <div className="min-h-96 min-w-full px-2 overflow-x-auto">
@@ -60,7 +32,7 @@ const DataTable = () => {
               <th
                 onClick={() => getDataById(item.id)}
                 key={item.id}
-                className="text-center border cursor-pointer">
+                className="text-center border cursor-pointer hover:bg-slate-100">
                 {item.productionTime}
               </th>
             ))}
@@ -72,13 +44,13 @@ const DataTable = () => {
               className="text-center border "
               rowSpan={2}
               style={{ width: "10%" }}>
-              {characteristicValue[0]}
+              3.08 +/- 0.03
             </td>
             <td
               className="text-center border "
               rowSpan={2}
               style={{ width: "10%" }}>
-              {toolValue[0]}
+              PG
             </td>
             <td className="text-center border " style={{ width: "15%" }}>
               1
@@ -87,7 +59,7 @@ const DataTable = () => {
               <td
                 onClick={() => getDataById(item.id)}
                 key={item.id}
-                className="text-center border cursor-pointer"
+                className="text-center border cursor-pointer hover:bg-slate-100"
                 style={{ width: "15%" }}>
                 {item.result.cav1?.pg || "-"}
               </td>
@@ -101,7 +73,7 @@ const DataTable = () => {
               <td
                 onClick={() => getDataById(item.id)}
                 key={item.id}
-                className="text-center border cursor-pointer"
+                className="text-center border cursor-pointer hover:bg-slate-100"
                 style={{ width: "15%" }}>
                 {item.result.cav2?.pg || "-"}
               </td>
@@ -112,13 +84,13 @@ const DataTable = () => {
               className="text-center border "
               rowSpan={2}
               style={{ width: "10%" }}>
-              {characteristicValue[1]}
+              3.8 +/- 0.05
             </td>
             <td
               className="text-center border "
               rowSpan={2}
               style={{ width: "10%" }}>
-              {toolValue[1]}
+              TMS
             </td>
             <td className="text-center border" style={{ width: "15%" }}>
               1
@@ -127,7 +99,7 @@ const DataTable = () => {
               <td
                 onClick={() => getDataById(item.id)}
                 key={item.id}
-                className="text-center border cursor-pointer"
+                className="text-center border cursor-pointer hover:bg-slate-100"
                 style={{ width: "15%" }}>
                 {item.result.cav1?.tms1 || "-"}
               </td>
@@ -141,7 +113,7 @@ const DataTable = () => {
               <td
                 onClick={() => getDataById(item.id)}
                 key={item.id}
-                className="text-center border cursor-pointer"
+                className="text-center border cursor-pointer hover:bg-slate-100"
                 style={{ width: "15%" }}>
                 {item.result.cav2?.tms1 || "-"}
               </td>
@@ -151,14 +123,14 @@ const DataTable = () => {
             <td
               className="text-center border "
               rowSpan={2}
-              style={{ width: "10%" }}>
-              {characteristicValue[2]}
+              style={{ width: "15%" }}>
+              17.15 +/- 0.05
             </td>
             <td
               className="text-center border "
               rowSpan={2}
               style={{ width: "10%" }}>
-              {toolValue[2]}
+              TMS
             </td>
             <td className="text-center border " style={{ width: "15%" }}>
               1
@@ -167,7 +139,7 @@ const DataTable = () => {
               <td
                 onClick={() => getDataById(item.id)}
                 key={item.id}
-                className="text-center border cursor-pointer"
+                className="text-center border cursor-pointer hover:bg-slate-100"
                 style={{ width: "15%" }}>
                 {item.result.cav1?.tms2 || "-"}
               </td>
@@ -181,7 +153,7 @@ const DataTable = () => {
               <td
                 onClick={() => getDataById(item.id)}
                 key={item.id}
-                className="text-center border cursor-pointer"
+                className="text-center border cursor-pointer hover:bg-slate-100"
                 style={{ width: "15%" }}>
                 {item.result.cav2?.tms2 || "-"}
               </td>
@@ -189,10 +161,10 @@ const DataTable = () => {
           </tr>
         </tbody>
       </table>
-      {isModalDetailOpen ? <ModalFormDetail /> : ""}
-      {isModalDeleteOpen ? <ModalDelete /> : ""}
+      {isModalDetailOpen && <ModalFormDetail />}
+      {isModalDeleteOpen && <ModalDelete />}
     </div>
   );
 };
 
-export default DataTable;
+export default KnobManL1stData;
