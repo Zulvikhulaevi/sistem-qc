@@ -10,6 +10,8 @@ const Header = () => {
     setProductionDate,
     productionTime,
     setProductionTime,
+    isPrdDateBlank,
+    isPrdTimeBlank,
   } = useAllStateContext();
 
   return (
@@ -26,22 +28,36 @@ const Header = () => {
           </select>
         </div>
         <div className="flex flex-col ms-2">
-          <span className="label-text ms-1 mb-1">Production Date</span>
+          <span
+            className={`label-text ms-1 mb-1 ${
+              isPrdDateBlank ? "text-red-500" : ""
+            }`}>
+            Production Date
+          </span>
           <input
             type="text"
             placeholder="040426M1-05C"
             value={productionDate}
             onChange={(e) => setProductionDate(e.target.value)}
-            className="input input-sm input-bordered"
+            className={`input input-sm input-bordered ${
+              isPrdDateBlank ? "border-red-500" : ""
+            }`}
           />
         </div>
         <div className="flex flex-col ms-2">
-          <span className="label-text ms-1 mb-1">Production Time</span>
+          <span
+            className={`label-text ms-1 mb-1 ${
+              isPrdTimeBlank ? "text-red-500" : ""
+            }`}>
+            Production Time
+          </span>
           <input
             type="time"
             value={productionTime}
             onChange={(e) => setProductionTime(e.target.value)}
-            className="input input-sm input-bordered w-full"
+            className={`input input-sm input-bordered ${
+              isPrdTimeBlank ? "border-red-500" : ""
+            }`}
           />
         </div>
       </div>

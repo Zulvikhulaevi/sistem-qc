@@ -6,6 +6,8 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  orderBy,
+  query,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -135,7 +137,8 @@ export async function getDataById(docId) {
 export async function getAllData() {
   try {
     const docRef = collection(firestore, "QcData");
-    const snapshot = await getDocs(docRef);
+    const q = query(docRef, orderBy("date", "desc"));
+    const snapshot = await getDocs(q);
 
     const subData = [];
     snapshot.forEach((doc) => {

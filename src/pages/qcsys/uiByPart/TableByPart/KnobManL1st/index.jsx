@@ -6,7 +6,6 @@ import ModalFormDetail from "@/pages/qcsys/components/Modal/ModalFormDetail";
 const KnobManL1stData = () => {
   const { allData, isModalDetailOpen, isModalDeleteOpen } =
     useAllStateContext();
-
   const { getDataById } = useDataFunctionContext();
 
   return (
@@ -20,22 +19,33 @@ const KnobManL1stData = () => {
             <th className="text-center border" rowSpan={2}>
               Tools
             </th>
-            <th className="text-center border" rowSpan={2}>
+            <th className="text-center border" rowSpan={3}>
               Cav
             </th>
-            <th className="text-center border" colSpan={allData.length}>
-              Production Time
-            </th>
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <th
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100">
+                  {item.productionDate}
+                </th>
+              ))}
           </tr>
           <tr>
-            {allData.map((item) => (
-              <th
-                onClick={() => getDataById(item.id)}
-                key={item.id}
-                className="text-center border cursor-pointer hover:bg-slate-100">
-                {item.productionTime}
-              </th>
-            ))}
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <th
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100">
+                  {item.productionTime}
+                </th>
+              ))}
           </tr>
         </thead>
         <tbody>
@@ -55,29 +65,35 @@ const KnobManL1stData = () => {
             <td className="text-center border " style={{ width: "15%" }}>
               1
             </td>
-            {allData.map((item) => (
-              <td
-                onClick={() => getDataById(item.id)}
-                key={item.id}
-                className="text-center border cursor-pointer hover:bg-slate-100"
-                style={{ width: "15%" }}>
-                {item.result.cav1?.pg || "-"}
-              </td>
-            ))}
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <td
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100"
+                  style={{ width: "15%" }}>
+                  {item.result.cav1?.pg || "-"}
+                </td>
+              ))}
           </tr>
           <tr>
             <td className="text-center border " style={{ width: "15%" }}>
               2
             </td>
-            {allData.map((item) => (
-              <td
-                onClick={() => getDataById(item.id)}
-                key={item.id}
-                className="text-center border cursor-pointer hover:bg-slate-100"
-                style={{ width: "15%" }}>
-                {item.result.cav2?.pg || "-"}
-              </td>
-            ))}
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <td
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100"
+                  style={{ width: "15%" }}>
+                  {item.result.cav2?.pg || "-"}
+                </td>
+              ))}
           </tr>
           <tr>
             <td
@@ -95,29 +111,35 @@ const KnobManL1stData = () => {
             <td className="text-center border" style={{ width: "15%" }}>
               1
             </td>
-            {allData.map((item) => (
-              <td
-                onClick={() => getDataById(item.id)}
-                key={item.id}
-                className="text-center border cursor-pointer hover:bg-slate-100"
-                style={{ width: "15%" }}>
-                {item.result.cav1?.tms1 || "-"}
-              </td>
-            ))}
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <td
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100"
+                  style={{ width: "15%" }}>
+                  {item.result.cav1?.tms1 || "-"}
+                </td>
+              ))}
           </tr>
           <tr>
             <td className="text-center border " style={{ width: "15%" }}>
               2
             </td>
-            {allData.map((item) => (
-              <td
-                onClick={() => getDataById(item.id)}
-                key={item.id}
-                className="text-center border cursor-pointer hover:bg-slate-100"
-                style={{ width: "15%" }}>
-                {item.result.cav2?.tms1 || "-"}
-              </td>
-            ))}
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <td
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100"
+                  style={{ width: "15%" }}>
+                  {item.result.cav2?.tms1 || "-"}
+                </td>
+              ))}
           </tr>
           <tr>
             <td
@@ -135,29 +157,35 @@ const KnobManL1stData = () => {
             <td className="text-center border " style={{ width: "15%" }}>
               1
             </td>
-            {allData.map((item) => (
-              <td
-                onClick={() => getDataById(item.id)}
-                key={item.id}
-                className="text-center border cursor-pointer hover:bg-slate-100"
-                style={{ width: "15%" }}>
-                {item.result.cav1?.tms2 || "-"}
-              </td>
-            ))}
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <td
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100"
+                  style={{ width: "15%" }}>
+                  {item.result.cav1?.tms2 || "-"}
+                </td>
+              ))}
           </tr>
           <tr>
             <td className="text-center border " style={{ width: "15%" }}>
               2
             </td>
-            {allData.map((item) => (
-              <td
-                onClick={() => getDataById(item.id)}
-                key={item.id}
-                className="text-center border cursor-pointer hover:bg-slate-100"
-                style={{ width: "15%" }}>
-                {item.result.cav2?.tms2 || "-"}
-              </td>
-            ))}
+            {allData
+              .slice()
+              .reverse()
+              .map((item) => (
+                <td
+                  onClick={() => getDataById(item.id)}
+                  key={item.id}
+                  className="text-center border cursor-pointer hover:bg-slate-100"
+                  style={{ width: "15%" }}>
+                  {item.result.cav2?.tms2 || "-"}
+                </td>
+              ))}
           </tr>
         </tbody>
       </table>
