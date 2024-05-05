@@ -17,16 +17,9 @@ const KnobManL1stFormContent = (props) => {
           <div className="flex">
             <input
               type="number"
-              placeholder="Point"
-              value={props.pointPgValue}
-              onChange={props.setPointPgValue}
-              className="input input-sm input-bordered w-1/4"
-            />
-            <input
-              type="number"
-              value={props.pgValue}
-              onChange={props.setPgValue}
-              className="input input-sm input-bordered w-full ms-2"
+              value={props.pg1Value}
+              onChange={props.setPg1Value}
+              className="input input-sm input-bordered w-full"
             />
           </div>
         </label>
@@ -42,16 +35,9 @@ const KnobManL1stFormContent = (props) => {
           <div className="flex">
             <input
               type="number"
-              placeholder="Point"
-              value={props.pointTms1Value}
-              onChange={props.setPointTms1Value}
-              className="input input-sm input-bordered w-1/4"
-            />
-            <input
-              type="number"
               value={props.tms1Value}
               onChange={props.setTms1Value}
-              className="input input-sm input-bordered w-full ms-2"
+              className="input input-sm input-bordered w-full"
             />
           </div>
         </label>
@@ -67,16 +53,27 @@ const KnobManL1stFormContent = (props) => {
           <div className="flex">
             <input
               type="number"
-              placeholder="Point"
-              value={props.pointTms2Value}
-              onChange={props.setPointTms2Value}
-              className="input input-sm input-bordered w-1/4"
-            />
-            <input
-              type="number"
               value={props.tms2Value}
               onChange={props.setTms2Value}
-              className="input input-sm input-bordered w-full ms-2"
+              className="input input-sm input-bordered w-full"
+            />
+          </div>
+        </label>
+      </div>
+      <div>
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">DB</span>
+            <span className="text-sm text-end text-emerald-600">
+              17.16 +\- 0.35
+            </span>
+          </div>
+          <div className="flex">
+            <input
+              type="number"
+              value={props.dbValue}
+              onChange={props.setDbValue}
+              className="input input-sm input-bordered w-full"
             />
           </div>
         </label>

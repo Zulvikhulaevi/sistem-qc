@@ -3,16 +3,12 @@ import KnobManL1stFormContent from "@/pages/qcsys/components/FormContent/KnobMan
 
 const Cavity1 = () => {
   const {
-    pointPg,
-    pointTms1,
-    pointTms2,
-    cav1pg,
+    cav1Db,
+    cav1Pg1,
     cav1Tms1,
     cav1Tms2,
-    setPointPg,
-    setPointTms1,
-    setPointTms2,
-    setCav1pg,
+    setCav1Db,
+    setCav1Pg1,
     setCav1Tms1,
     setCav1Tms2,
   } = useAllStateContext();
@@ -26,14 +22,10 @@ const Cavity1 = () => {
             <hr className="border border-gray-400 my-1" />
           </div>
         }
-        pointPgValue={pointPg}
-        setPointPgValue={(e) => setPointPg(e.target.value)}
-        pointTms1Value={pointTms1}
-        setPointTms1Value={(e) => setPointTms1(e.target.value)}
-        pointTms2Value={pointTms2}
-        setPointTms2Value={(e) => setPointTms2(e.target.value)}
-        pgValue={cav1pg}
-        setPgValue={(e) => setCav1pg(e.target.value)}
+        dbValue={cav1Db}
+        setDbValue={(e) => setCav1Db(e.target.value)}
+        pg1Value={cav1Pg1}
+        setPg1Value={(e) => setCav1Pg1(e.target.value)}
         tms1Value={cav1Tms1}
         setTms1Value={(e) => setCav1Tms1(e.target.value)}
         tms2Value={cav1Tms2}

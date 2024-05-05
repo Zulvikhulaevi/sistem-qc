@@ -30,6 +30,7 @@ const Header = () => {
             onChange={(e) => setPartName(e.target.value)}>
             <option value="">Pilih Part</option>
             <option value="Knob Manual L 1 st">Knob Manual L 1 st</option>
+            <option value="Straight 3rd">Straight 3rd</option>
           </select>
         </div>
         <div className="flex flex-col ms-2">

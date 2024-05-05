@@ -9,16 +9,10 @@ import KnobManL1stFormContent from "../../FormContent/KnobManL1st";
 const ModalFormDetail = () => {
   const {
     partName,
-    pointPgEdit,
-    pointTms1Edit,
-    pointTms2Edit,
-    setPointPgEdit,
-    setPointTms1Edit,
-    setPointTms2Edit,
-    cav1PgEdit,
-    setCav1PgEdit,
-    cav2PgEdit,
-    setCav2PgEdit,
+    cav1Pg1Edit,
+    setCav1Pg1Edit,
+    cav2Pg1Edit,
+    setCav2Pg1Edit,
     cav1Tms1Edit,
     setCav1Tms1Edit,
     cav2Tms1Edit,
@@ -77,18 +71,8 @@ const ModalFormDetail = () => {
                           <hr className="border border-gray-400 my-1" />
                         </div>
                       }
-                      pointPgValue={pointPgEdit}
-                      setPointPgValue={(e) => setPointPgEdit(e.target.value)}
-                      pointTms1Value={pointTms1Edit}
-                      setPointTms1Value={(e) =>
-                        setPointTms1Edit(e.target.value)
-                      }
-                      pointTms2Value={pointTms2Edit}
-                      setPointTms2Value={(e) =>
-                        setPointTms2Edit(e.target.value)
-                      }
-                      pgValue={cav1PgEdit}
-                      setPgValue={(e) => setCav1PgEdit(e.target.value)}
+                      pgValue={cav1Pg1Edit}
+                      setPgValue={(e) => setCav1Pg1Edit(e.target.value)}
                       tms1Value={cav1Tms1Edit}
                       setTms1Value={(e) => setCav1Tms1Edit(e.target.value)}
                       tms2Value={cav1Tms2Edit}
@@ -106,18 +90,8 @@ const ModalFormDetail = () => {
                           <hr className="border border-gray-400 my-1" />
                         </div>
                       }
-                      pointPgValue={pointPgEdit}
-                      setPointPgValue={(e) => setPointPgEdit(e.target.value)}
-                      pointTms1Value={pointTms1Edit}
-                      setPointTms1Value={(e) =>
-                        setPointTms1Edit(e.target.value)
-                      }
-                      pointTms2Value={pointTms2Edit}
-                      setPointTms2Value={(e) =>
-                        setPointTms2Edit(e.target.value)
-                      }
-                      pgValue={cav2PgEdit}
-                      setPgValue={(e) => setCav2PgEdit(e.target.value)}
+                      pgValue={cav2Pg1Edit}
+                      setPgValue={(e) => setCav2Pg1Edit(e.target.value)}
                       tms1Value={cav2Tms1Edit}
                       setTms1Value={(e) => setCav2Tms1Edit(e.target.value)}
                       tms2Value={cav2Tms2Edit}

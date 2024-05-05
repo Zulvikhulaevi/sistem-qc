@@ -10,6 +10,7 @@ import {
   query,
   serverTimestamp,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import app from "../init";
 
@@ -27,19 +28,66 @@ export async function addData(
     let measurementData;
     if (partName === "Knob Manual L 1 st") {
       measurementData = {
-        pointPg: data.pointPg,
-        pointTms1: data.pointTms1,
-        pointTms2: data.pointTms2,
         partName: partName,
         cav1: {
-          pg: data.cav1pg,
+          pg: data.cav1Pg1,
           tms1: data.cav1Tms1,
           tms2: data.cav1Tms2,
+          db: data.cav1Db,
         },
         cav2: {
-          pg: data.cav2pg,
+          pg: data.cav2Pg1,
           tms1: data.cav2Tms1,
           tms2: data.cav2Tms2,
+          db: data.cav2Db,
+        },
+      };
+    } else if (partName === "Straight 3rd") {
+      measurementData = {
+        partName: partName,
+        cav1: {
+          tms1: data.cav1Tms1,
+          tms2: data.cav1Tms2,
+          tms3: data.cav1Tms3,
+          tms4: data.cav1Tms4,
+          surface: data.cav1Surface,
+          pg1: data.cav1Pg1,
+          pg2: data.cav1Pg2,
+          tms5: data.cav1Tms5,
+          db: data.cav1Db,
+        },
+        cav2: {
+          tms1: data.cav2Tms1,
+          tms2: data.cav2Tms2,
+          tms3: data.cav2Tms3,
+          tms4: data.cav2Tms4,
+          surface: data.cav2Surface,
+          pg1: data.cav2Pg1,
+          pg2: data.cav2Pg2,
+          tms5: data.cav2Tms5,
+          db: data.cav2Db,
+        },
+        cav3: {
+          tms1: data.cav3Tms1,
+          tms2: data.cav3Tms2,
+          tms3: data.cav3Tms3,
+          tms4: data.cav3Tms4,
+          surface: data.cav3Surface,
+          pg1: data.cav3Pg1,
+          pg2: data.cav3Pg2,
+          tms5: data.cav3Tms5,
+          db: data.cav3Db,
+        },
+        cav4: {
+          tms1: data.cav4Tms1,
+          tms2: data.cav4Tms2,
+          tms3: data.cav4Tms3,
+          tms4: data.cav4Tms4,
+          surface: data.cav4Surface,
+          pg1: data.cav4Pg1,
+          pg2: data.cav4Pg2,
+          tms5: data.cav4Tms5,
+          db: data.cav4Db,
         },
       };
     } else {
@@ -64,16 +112,14 @@ export async function addData(
 
 export async function updateData(
   docId,
-  partName,
   name,
   nik,
   productionDate,
   productionTime,
-  pointPg,
-  pointTms1,
-  pointTms2,
-  cav1pg,
-  cav2pg,
+  cav1Db,
+  cav2Db,
+  cav1Pg1,
+  cav2Pg1,
   cav1Tms1,
   cav2Tms1,
   cav1Tms2,
@@ -87,18 +133,17 @@ export async function updateData(
       productionDate: productionDate,
       productionTime: productionTime,
       result: {
-        pointPg: pointPg,
-        pointTms1: pointTms1,
-        pointTms2: pointTms2,
         cav1: {
-          pg: cav1pg,
+          pg: cav1Pg1,
           tms1: cav1Tms1,
           tms2: cav1Tms2,
+          db: cav1Db,
         },
         cav2: {
-          pg: cav2pg,
+          pg: cav2Pg1,
           tms1: cav2Tms1,
           tms2: cav2Tms2,
+          db: cav2Db,
         },
       },
     });
@@ -134,10 +179,10 @@ export async function getDataById(docId) {
   }
 }
 
-export async function getAllData() {
+export async function getAllData(partName) {
   try {
     const docRef = collection(firestore, "QcData");
-    const q = query(docRef, orderBy("date", "desc"));
+    const q = query(docRef, where("result.partName", "==", partName));
     const snapshot = await getDocs(q);
 
     const subData = [];
