@@ -4,9 +4,10 @@ const AllStateContext = createContext();
 
 export const AllStateContextProvider = ({ children }) => {
   const [isBtnAddLoading, setIsBtnAddLoading] = useState(false);
+  const [isBtnLoading, setIsBtnLoading] = useState(false);
 
   const [docId, setDocId] = useState("");
-  const [partName, setPartName] = useState("");
+  const [partName, setPartName] = useState("Knob Manual L 1 st");
 
   const [productionDate, setProductionDate] = useState("");
   const [productionTime, setProductionTime] = useState("");
@@ -302,6 +303,8 @@ export const AllStateContextProvider = ({ children }) => {
     setIsTab4ModalActive,
     isBtnAddLoading,
     setIsBtnAddLoading,
+    isBtnLoading,
+    setIsBtnLoading,
   };
 
   return (

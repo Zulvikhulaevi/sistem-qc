@@ -7,7 +7,11 @@ const Navbar = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const isLoginPage = () => {
+  const isAuthPage = () => {
+    return router.pathname === "/auth/login";
+  };
+
+  const isRootPage = () => {
     return router.pathname === "/";
   };
 
@@ -24,7 +28,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-end">
-        {!isLoginPage() && (
+        {!isAuthPage() && !isRootPage() && (
           <div className="me-4">
             {session ? (
               <button
@@ -42,7 +46,7 @@ const Navbar = () => {
           </div>
         )}
         {session
-          ? isLoginPage() && (
+          ? isAuthPage() && (
               <button
                 onClick={signOut}
                 className="btn btn-sm btn-warning text-white hover:bg-yellow-400 hover:border-yellow-400">
