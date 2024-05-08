@@ -10,9 +10,13 @@ const Navbar = () => {
   const isAuthPage = () => {
     return router.pathname === "/auth/login";
   };
-
   const isRootPage = () => {
     return router.pathname === "/";
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.push("/qcsys/qcdataview");
   };
 
   return (
@@ -32,13 +36,13 @@ const Navbar = () => {
           <div className="me-4">
             {session ? (
               <button
-                onClick={signOut}
+                onClick={handleSignOut}
                 className="btn btn-sm btn-warning text-white hover:bg-yellow-400 hover:border-yellow-400">
                 Sign Out
               </button>
             ) : (
               <Link
-                href={"/"}
+                href={"/auth/login"}
                 className="btn btn-sm bg-emerald-600 text-white hover:bg-emerald-600">
                 Sign In
               </Link>
@@ -48,7 +52,7 @@ const Navbar = () => {
         {session
           ? isAuthPage() && (
               <button
-                onClick={signOut}
+                onClick={handleSignOut}
                 className="btn btn-sm btn-warning text-white hover:bg-yellow-400 hover:border-yellow-400">
                 Sign Out
               </button>

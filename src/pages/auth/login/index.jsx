@@ -6,12 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const LoginPage = () => {
-  const { push, query } = useRouter();
+  const { push } = useRouter();
   const { data: session } = useSession();
   const { isValueError, setIsValueError, isBtnLoading, setIsBtnLoading } =
     useAllStateContext();
-
-  const callbackUrl = query.callbackUrl || "/qcsys";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,18 +20,19 @@ const LoginPage = () => {
         redirect: false,
         nik: form.nik.value,
         password: form.password.value,
-        callbackUrl,
       });
       if (!response?.error) {
         form.reset();
+        push("/qcsys");
         setIsBtnLoading(false);
         setIsValueError(false);
-        push(callbackUrl);
       } else {
         setIsBtnLoading(false);
         setIsValueError(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -89,7 +88,7 @@ const LoginPage = () => {
                 href={"/qcsys"}
                 className="btn
                 bg-gray-300
-                w-1/2">
+                w-full">
                 Dashboard
                 <FontAwesomeIcon
                   icon={faArrowRight}

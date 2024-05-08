@@ -18,7 +18,7 @@ const RegisterPage = () => {
       form.reset();
       push("/");
     } else {
-      console.log("Reggister Failed");
+      console.log("Register Failed");
     }
   };
 

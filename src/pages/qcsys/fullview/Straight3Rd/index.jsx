@@ -1,13 +1,14 @@
 import { useAllStateContext } from "@/context/AllStateContext";
-import { useDataFunctionContext } from "@/context/DataFunctionContext";
 import ModalDelete from "@/pages/qcsys/components/Modal/ModalDelete";
 import ModalFormDetail4List from "@/pages/qcsys/components/Modal/ModalFormDetail/Straight3Rd";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format } from "date-fns";
+import Link from "next/link";
 
-const Straight3RdData = (props) => {
+const Straight3RdFullView = () => {
   const { allData, isModalDetailOpen, isModalDeleteOpen } =
     useAllStateContext();
-  const { getDataById } = useDataFunctionContext();
 
   return (
     <div className="flex min-w-full min-h-96 max-h-96 px-2">
@@ -28,10 +29,7 @@ const Straight3RdData = (props) => {
                 .slice()
                 .reverse()
                 .map((item) => (
-                  <th
-                    onClick={() => getDataById(item.id)}
-                    key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100">
+                  <th key={item.id} className="text-center border">
                     {item.productionDate}
                   </th>
                 ))}
@@ -41,10 +39,7 @@ const Straight3RdData = (props) => {
                 .slice()
                 .reverse()
                 .map((item) => (
-                  <th
-                    onClick={() => getDataById(item.id)}
-                    key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100">
+                  <th key={item.id} className="text-center border">
                     {item.productionTime}
                   </th>
                 ))}
@@ -66,9 +61,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.tms1 || "-"}
                   </td>
@@ -83,9 +77,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.tms1 || "-"}
                   </td>
@@ -100,9 +93,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.tms1 || "-"}
                   </td>
@@ -117,9 +109,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.tms1 || "-"}
                   </td>
@@ -143,9 +134,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.tms2 || "-"}
                   </td>
@@ -160,9 +150,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.tms2 || "-"}
                   </td>
@@ -177,9 +166,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.tms2 || "-"}
                   </td>
@@ -194,9 +182,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.tms2 || "-"}
                   </td>
@@ -220,9 +207,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.tms3 || "-"}
                   </td>
@@ -237,9 +223,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.tms3 || "-"}
                   </td>
@@ -254,9 +239,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.tms3 || "-"}
                   </td>
@@ -271,9 +255,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.tms3 || "-"}
                   </td>
@@ -297,9 +280,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.tms4 || "-"}
                   </td>
@@ -314,9 +296,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.tms2 || "-"}
                   </td>
@@ -331,9 +312,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.tms4 || "-"}
                   </td>
@@ -348,9 +328,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.tms4 || "-"}
                   </td>
@@ -374,9 +353,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.surfaceTest || "-"}
                   </td>
@@ -391,9 +369,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.surfaceTest || "-"}
                   </td>
@@ -408,9 +385,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.surfaceTest || "-"}
                   </td>
@@ -425,9 +401,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.surfaceTest || "-"}
                   </td>
@@ -451,9 +426,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.pg1 || "-"}
                   </td>
@@ -468,9 +442,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.pg1 || "-"}
                   </td>
@@ -485,9 +458,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.pg1 || "-"}
                   </td>
@@ -502,9 +474,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.pg1 || "-"}
                   </td>
@@ -528,9 +499,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.pg2 || "-"}
                   </td>
@@ -545,9 +515,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.pg2 || "-"}
                   </td>
@@ -562,9 +531,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.pg2 || "-"}
                   </td>
@@ -579,9 +547,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.pg2 || "-"}
                   </td>
@@ -605,9 +572,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.tms5 || "-"}
                   </td>
@@ -622,9 +588,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.tms5 || "-"}
                   </td>
@@ -639,9 +604,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.tms5 || "-"}
                   </td>
@@ -656,9 +620,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.tms5 || "-"}
                   </td>
@@ -682,9 +645,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav1?.db || "-"}
                   </td>
@@ -699,9 +661,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav2?.db || "-"}
                   </td>
@@ -716,9 +677,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav3?.db || "-"}
                   </td>
@@ -733,9 +693,8 @@ const Straight3RdData = (props) => {
                 .reverse()
                 .map((item) => (
                   <td
-                    onClick={() => getDataById(item.id)}
                     key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100"
+                    className="text-center border"
                     style={{ width: "15%" }}>
                     {item.result.cav4?.db || "-"}
                   </td>
@@ -749,10 +708,7 @@ const Straight3RdData = (props) => {
                 .slice()
                 .reverse()
                 .map((item) => (
-                  <td
-                    onClick={() => getDataById(item.id)}
-                    key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100">
+                  <td key={item.id} className="text-center border">
                     {item.name || "-"}
                   </td>
                 ))}
@@ -765,10 +721,7 @@ const Straight3RdData = (props) => {
                 .slice()
                 .reverse()
                 .map((item) => (
-                  <td
-                    onClick={() => getDataById(item.id)}
-                    key={item.id}
-                    className="text-center border cursor-pointer hover:bg-slate-100">
+                  <td key={item.id} className="text-center border">
                     {format(new Date(item.date.seconds * 1000), "dd/MM/yyyy") ||
                       "-"}
                   </td>
@@ -780,10 +733,12 @@ const Straight3RdData = (props) => {
         {isModalDeleteOpen && <ModalDelete />}
       </div>
       <div className="flex min-h-full items-center justify-center">
-        {props.backBtn}
+        <Link href={"/qcsys"} className="btn btn-sm btn-base h-full ms-2">
+          <FontAwesomeIcon icon={faChevronLeft} size="xl" />
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Straight3RdData;
+export default Straight3RdFullView;

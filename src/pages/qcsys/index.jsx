@@ -1,14 +1,28 @@
 import FormView from "./views/FormView";
 import DataView from "./views/DataView";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDataFunctionContext } from "@/context/DataFunctionContext";
-import { useSession } from "next-auth/react";
 import { useAllStateContext } from "@/context/AllStateContext";
+import { getSession, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const QcSys = () => {
-  const { data: session } = useSession();
-  const { partName, dateNow } = useAllStateContext();
+  const router = useRouter();
+  const { partName } = useAllStateContext();
   const { getAllData } = useDataFunctionContext();
+  const { data: session } = useSession();
+
+  const checkAuth = async () => {
+    const session = await getSession();
+    if (!session) {
+      router.push("/");
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   useEffect(() => {
     getAllData();

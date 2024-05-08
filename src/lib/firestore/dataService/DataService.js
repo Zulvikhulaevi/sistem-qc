@@ -6,7 +6,6 @@ import {
   getDoc,
   getDocs,
   getFirestore,
-  orderBy,
   query,
   serverTimestamp,
   updateDoc,
@@ -30,13 +29,13 @@ export async function addData(
       measurementData = {
         partName: partName,
         cav1: {
-          pg: data.cav1Pg1,
+          pg1: data.cav1Pg1,
           tms1: data.cav1Tms1,
           tms2: data.cav1Tms2,
           db: data.cav1Db,
         },
         cav2: {
-          pg: data.cav2Pg1,
+          pg1: data.cav2Pg1,
           tms1: data.cav2Tms1,
           tms2: data.cav2Tms2,
           db: data.cav2Db,
@@ -50,7 +49,7 @@ export async function addData(
           tms2: data.cav1Tms2,
           tms3: data.cav1Tms3,
           tms4: data.cav1Tms4,
-          surface: data.cav1Surface,
+          surfaceTest: data.cav1Surface,
           pg1: data.cav1Pg1,
           pg2: data.cav1Pg2,
           tms5: data.cav1Tms5,
@@ -61,7 +60,7 @@ export async function addData(
           tms2: data.cav2Tms2,
           tms3: data.cav2Tms3,
           tms4: data.cav2Tms4,
-          surface: data.cav2Surface,
+          surfaceTest: data.cav2Surface,
           pg1: data.cav2Pg1,
           pg2: data.cav2Pg2,
           tms5: data.cav2Tms5,
@@ -72,7 +71,7 @@ export async function addData(
           tms2: data.cav3Tms2,
           tms3: data.cav3Tms3,
           tms4: data.cav3Tms4,
-          surface: data.cav3Surface,
+          surfaceTest: data.cav3Surface,
           pg1: data.cav3Pg1,
           pg2: data.cav3Pg2,
           tms5: data.cav3Tms5,
@@ -83,7 +82,7 @@ export async function addData(
           tms2: data.cav4Tms2,
           tms3: data.cav4Tms3,
           tms4: data.cav4Tms4,
-          surface: data.cav4Surface,
+          surfaceTest: data.cav4Surface,
           pg1: data.cav4Pg1,
           pg2: data.cav4Pg2,
           tms5: data.cav4Tms5,
@@ -110,44 +109,86 @@ export async function addData(
   }
 }
 
-export async function updateData(
-  docId,
-  name,
-  nik,
-  productionDate,
-  productionTime,
-  cav1Db,
-  cav2Db,
-  cav1Pg1,
-  cav2Pg1,
-  cav1Tms1,
-  cav2Tms1,
-  cav1Tms2,
-  cav2Tms2
-) {
+export async function updateData(data) {
   try {
-    const docRef = doc(firestore, "QcData", docId);
-    const snapshot = await updateDoc(docRef, {
-      name: name,
-      nik: nik,
-      productionDate: productionDate,
-      productionTime: productionTime,
-      result: {
+    let measurementData;
+    if (data.partName === "Knob Manual L 1 st") {
+      measurementData = {
+        result: {
+          partName: data.partName,
+          cav1: {
+            pg1: data.cav1Pg1,
+            tms1: data.cav1Tms1,
+            tms2: data.cav1Tms2,
+            db: data.cav1Db,
+          },
+          cav2: {
+            pg1: data.cav2Pg1,
+            tms1: data.cav2Tms1,
+            tms2: data.cav2Tms2,
+            db: data.cav2Db,
+          },
+        },
+      };
+    } else if (data.partName === "Straight 3rd") {
+      measurementData = {
+        partName: data.partName,
         cav1: {
-          pg: cav1Pg1,
-          tms1: cav1Tms1,
-          tms2: cav1Tms2,
-          db: cav1Db,
+          tms1: data.cav1Tms1,
+          tms2: data.cav1Tms2,
+          tms3: data.cav1Tms3,
+          tms4: data.cav1Tms4,
+          surfaceTest: data.cav1Surface,
+          pg1: data.cav1Pg1,
+          pg2: data.cav1Pg2,
+          tms5: data.cav1Tms5,
+          db: data.cav1Db,
         },
         cav2: {
-          pg: cav2Pg1,
-          tms1: cav2Tms1,
-          tms2: cav2Tms2,
-          db: cav2Db,
+          tms1: data.cav2Tms1,
+          tms2: data.cav2Tms2,
+          tms3: data.cav2Tms3,
+          tms4: data.cav2Tms4,
+          surfaceTest: data.cav2Surface,
+          pg1: data.cav2Pg1,
+          pg2: data.cav2Pg2,
+          tms5: data.cav2Tms5,
+          db: data.cav2Db,
         },
-      },
-    });
-    return snapshot;
+        cav3: {
+          tms1: data.cav3Tms1,
+          tms2: data.cav3Tms2,
+          tms3: data.cav3Tms3,
+          tms4: data.cav3Tms4,
+          surfaceTest: data.cav3Surface,
+          pg1: data.cav3Pg1,
+          pg2: data.cav3Pg2,
+          tms5: data.cav3Tms5,
+          db: data.cav3Db,
+        },
+        cav4: {
+          tms1: data.cav4Tms1,
+          tms2: data.cav4Tms2,
+          tms3: data.cav4Tms3,
+          tms4: data.cav4Tms4,
+          surfaceTest: data.cav4Surface,
+          pg1: data.cav4Pg1,
+          pg2: data.cav4Pg2,
+          tms5: data.cav4Tms5,
+          db: data.cav4Db,
+        },
+      };
+    } else {
+      throw new Error("Firestore : Invalid Part Name");
+    }
+
+    if (measurementData) {
+      const docRef = doc(firestore, "QcData", data.docId);
+      const snapshot = await updateDoc(docRef, measurementData);
+      return snapshot;
+    } else {
+      console.log("Firestore : Invalid measurementData Value");
+    }
   } catch (error) {
     console.error("Error updating document:", error);
     throw new Error("Failed to add document subcollection to Firestore");

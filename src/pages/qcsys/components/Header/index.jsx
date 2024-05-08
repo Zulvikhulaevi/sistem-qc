@@ -1,16 +1,9 @@
 import { useAllStateContext } from "@/context/AllStateContext";
 import { useSession } from "next-auth/react";
 
-const Header = () => {
+const Header = (props) => {
   const { data: session } = useSession();
-  const {
-    partName,
-    setPartName,
-    productionDate,
-    setProductionDate,
-    productionTime,
-    setProductionTime,
-  } = useAllStateContext();
+  const { partName, setPartName } = useAllStateContext();
 
   return (
     <div className="flex justify-between items-center">
@@ -18,13 +11,13 @@ const Header = () => {
         <div className="flex flex-col">
           <span
             className={`label-text ms-1 mb-1 ${
-              !partName ? "text-red-500" : ""
+              !partName ? "text-orange-500" : ""
             }`}>
             Pilih Part
           </span>
           <select
             className={`select select-sm select-bordered w-60  ${
-              !partName ? "border-red-500" : ""
+              !partName ? "border-orange-500" : ""
             }`}
             value={partName}
             onChange={(e) => setPartName(e.target.value)}>
@@ -33,39 +26,8 @@ const Header = () => {
             <option value="Straight 3rd">Straight 3rd</option>
           </select>
         </div>
-        <div className="flex flex-col ms-2">
-          <span
-            className={`label-text ms-1 mb-1 ${
-              !productionDate ? "text-red-500" : ""
-            }`}>
-            Production Date
-          </span>
-          <input
-            type="text"
-            placeholder="040426M1-05C"
-            value={productionDate}
-            onChange={(e) => setProductionDate(e.target.value)}
-            className={`input input-sm input-bordered ${
-              !productionDate ? "border-red-500" : ""
-            }`}
-          />
-        </div>
-        <div className="flex flex-col ms-2">
-          <span
-            className={`label-text ms-1 mb-1 ${
-              !productionTime ? "text-red-500" : ""
-            }`}>
-            Production Time
-          </span>
-          <input
-            type="time"
-            value={productionTime}
-            onChange={(e) => setProductionTime(e.target.value)}
-            className={`input input-sm input-bordered ${
-              !productionTime ? "border-red-500" : ""
-            }`}
-          />
-        </div>
+        <div className="flex flex-col ms-2">{props.dateInput}</div>
+        <div className="flex flex-col ms-2">{props.timeInput}</div>
       </div>
       <div className="flex flex-col rounded-lg me-4">
         <p className="text-sm text-primary">{session?.user.nama}</p>

@@ -8,7 +8,6 @@ const DataFunctionContext = createContext();
 export const DataFunctionContextProvider = ({ children }) => {
   const { data: session } = useSession();
   const {
-    setDateNow,
     setIsBtnAddLoading,
     setIsModalDetailOpen,
     setIsModalDeleteOpen,
@@ -120,6 +119,10 @@ export const DataFunctionContextProvider = ({ children }) => {
     setCav4Tms3Edit,
     setCav4Tms4Edit,
     setCav4Tms5Edit,
+    setCav1SurfaceEdit,
+    setCav2SurfaceEdit,
+    setCav3SurfaceEdit,
+    setCav4SurfaceEdit,
     setCav1Pg1Edit,
     setCav2Pg1Edit,
     setCav3Pg1Edit,
@@ -133,6 +136,120 @@ export const DataFunctionContextProvider = ({ children }) => {
     setCav3DbEdit,
     setCav4DbEdit,
   } = useAllStateContext();
+
+  const KnobManL1st = {
+    partName: partName,
+    name: session?.user.nama,
+    nik: session?.user.nik,
+    productionDate: productionDate,
+    productionTime: productionTime,
+    cav1Db: cav1Db,
+    cav2Db: cav2Db,
+    cav1Pg1: cav1Pg1,
+    cav2Pg1: cav2Pg1,
+    cav1Tms1: cav1Tms1,
+    cav2Tms1: cav2Tms1,
+    cav1Tms2: cav1Tms2,
+    cav2Tms2: cav2Tms2,
+  };
+
+  const KnobManL1stEdit = {
+    docId: docId,
+    partName: partName,
+    cav1Pg1: cav1Pg1Edit,
+    cav2Pg1: cav2Pg1Edit,
+    cav1Tms1: cav1Tms1Edit,
+    cav1Tms2: cav1Tms2Edit,
+    cav2Tms1: cav2Tms1Edit,
+    cav2Tms2: cav2Tms2Edit,
+    cav1Db: cav1DbEdit,
+    cav2Db: cav2DbEdit,
+  };
+
+  const Straight3Rd = {
+    partName: partName,
+    name: session?.user.nama,
+    nik: session?.user.nik,
+    productionDate: productionDate,
+    productionTime: productionTime,
+    cav1Tms1: cav1Tms1,
+    cav1Tms2: cav1Tms2,
+    cav1Tms3: cav1Tms3,
+    cav1Tms4: cav1Tms4,
+    cav1Tms5: cav1Tms5,
+    cav2Tms1: cav2Tms1,
+    cav2Tms2: cav2Tms2,
+    cav2Tms3: cav2Tms3,
+    cav2Tms4: cav2Tms4,
+    cav2Tms5: cav2Tms5,
+    cav3Tms1: cav3Tms1,
+    cav3Tms2: cav3Tms2,
+    cav3Tms3: cav3Tms3,
+    cav3Tms4: cav3Tms4,
+    cav3Tms5: cav3Tms5,
+    cav4Tms1: cav4Tms1,
+    cav4Tms2: cav4Tms2,
+    cav4Tms3: cav4Tms3,
+    cav4Tms4: cav4Tms4,
+    cav4Tms5: cav4Tms5,
+    cav1Surface: cav1Surface,
+    cav2Surface: cav2Surface,
+    cav3Surface: cav3Surface,
+    cav4Surface: cav4Surface,
+    cav1Pg1: cav1Pg1,
+    cav2Pg1: cav2Pg1,
+    cav3Pg1: cav3Pg1,
+    cav4Pg1: cav4Pg1,
+    cav1Pg2: cav1Pg2,
+    cav2Pg2: cav2Pg2,
+    cav3Pg2: cav3Pg2,
+    cav4Pg2: cav4Pg2,
+    cav1Db: cav1Db,
+    cav2Db: cav2Db,
+    cav3Db: cav3Db,
+    cav4Db: cav4Db,
+  };
+
+  const Straight3RdEdit = {
+    docId: docId,
+    partName: partName,
+    cav1Tms1: cav1Tms1Edit,
+    cav1Tms2: cav1Tms2Edit,
+    cav1Tms3: cav1Tms3Edit,
+    cav1Tms4: cav1Tms4Edit,
+    cav1Tms5: cav1Tms5Edit,
+    cav2Tms1: cav2Tms1Edit,
+    cav2Tms2: cav2Tms2Edit,
+    cav2Tms3: cav2Tms3Edit,
+    cav2Tms4: cav2Tms4Edit,
+    cav2Tms5: cav2Tms5Edit,
+    cav3Tms1: cav3Tms1Edit,
+    cav3Tms2: cav3Tms2Edit,
+    cav3Tms3: cav3Tms3Edit,
+    cav3Tms4: cav3Tms4Edit,
+    cav3Tms5: cav3Tms5Edit,
+    cav4Tms1: cav4Tms1Edit,
+    cav4Tms2: cav4Tms2Edit,
+    cav4Tms3: cav4Tms3Edit,
+    cav4Tms4: cav4Tms4Edit,
+    cav4Tms5: cav4Tms5Edit,
+    cav1Surface: cav1SurfaceEdit,
+    cav2Surface: cav2SurfaceEdit,
+    cav3Surface: cav3SurfaceEdit,
+    cav4Surface: cav4SurfaceEdit,
+    cav1Pg1: cav1Pg1Edit,
+    cav2Pg1: cav2Pg1Edit,
+    cav3Pg1: cav3Pg1Edit,
+    cav4Pg1: cav4Pg1Edit,
+    cav1Pg2: cav1Pg2Edit,
+    cav2Pg2: cav2Pg2Edit,
+    cav3Pg2: cav3Pg2Edit,
+    cav4Pg2: cav4Pg2Edit,
+    cav1Db: cav1DbEdit,
+    cav2Db: cav2DbEdit,
+    cav3Db: cav3DbEdit,
+    cav4Db: cav4DbEdit,
+  };
 
   const switchTab1 = () => {
     setIsTab1Active(true);
@@ -165,72 +282,32 @@ export const DataFunctionContextProvider = ({ children }) => {
   const switchTabModal1 = () => {
     setIsTab1ModalActive(true);
     setIsTab2ModalActive(false);
+    setIsTab3ModalActive(false);
+    setIsTab4ModalActive(false);
   };
 
   const switchTabModal2 = () => {
     setIsTab2ModalActive(true);
     setIsTab1ModalActive(false);
+    setIsTab3ModalActive(false);
+    setIsTab4ModalActive(false);
+  };
+
+  const switchTabModal3 = () => {
+    setIsTab3ModalActive(true);
+    setIsTab1ModalActive(false);
+    setIsTab2ModalActive(false);
+    setIsTab4ModalActive(false);
+  };
+
+  const switchTabModal4 = () => {
+    setIsTab4ModalActive(true);
+    setIsTab1ModalActive(false);
+    setIsTab2ModalActive(false);
+    setIsTab3ModalActive(false);
   };
 
   const addData = async () => {
-    const KnobManL1st = {
-      partName: partName,
-      name: session?.user.nama,
-      nik: session?.user.nik,
-      productionDate: productionDate,
-      productionTime: productionTime,
-      cav1Db: cav1Db,
-      cav2Db: cav2Db,
-      cav1Pg1: cav1Pg1,
-      cav2Pg1: cav2Pg1,
-      cav1Tms1: cav1Tms1,
-      cav2Tms1: cav2Tms1,
-      cav1Tms2: cav1Tms2,
-      cav2Tms2: cav2Tms2,
-    };
-    const Straight3Rd = {
-      partName: partName,
-      name: session?.user.nama,
-      nik: session?.user.nik,
-      productionDate: productionDate,
-      productionTime: productionTime,
-      cav1Tms1: cav1Tms1,
-      cav1Tms2: cav1Tms2,
-      cav1Tms3: cav1Tms3,
-      cav1Tms4: cav1Tms4,
-      cav1Tms5: cav1Tms5,
-      cav2Tms1: cav2Tms1,
-      cav2Tms2: cav2Tms2,
-      cav2Tms3: cav2Tms3,
-      cav2Tms4: cav2Tms4,
-      cav2Tms5: cav2Tms5,
-      cav3Tms1: cav3Tms1,
-      cav3Tms2: cav3Tms2,
-      cav3Tms3: cav3Tms3,
-      cav3Tms4: cav3Tms4,
-      cav3Tms5: cav3Tms5,
-      cav4Tms1: cav4Tms1,
-      cav4Tms2: cav4Tms2,
-      cav4Tms3: cav4Tms3,
-      cav4Tms4: cav4Tms4,
-      cav4Tms5: cav4Tms5,
-      cav1Surface: cav1Surface,
-      cav2Surface: cav2Surface,
-      cav3Surface: cav3Surface,
-      cav4Surface: cav4Surface,
-      cav1Pg1: cav1Pg1,
-      cav2Pg1: cav2Pg1,
-      cav3Pg1: cav3Pg1,
-      cav4Pg1: cav4Pg1,
-      cav1Pg2: cav1Pg2,
-      cav2Pg2: cav2Pg2,
-      cav3Pg2: cav3Pg2,
-      cav4Pg2: cav4Pg2,
-      cav1Db: cav1Db,
-      cav2Db: cav2Db,
-      cav3Db: cav3Db,
-      cav4Db: cav4Db,
-    };
     let data;
     if (partName === "Knob Manual L 1 st" && productionDate && productionTime) {
       if (
@@ -357,52 +434,22 @@ export const DataFunctionContextProvider = ({ children }) => {
 
   const updateData = async () => {
     try {
-      await axios.patch("/api/data/updateData", {
-        docId: docId,
-        partName: partName,
-        name: session?.user.nama,
-        nik: session?.user.nik,
-        productionDate: productionDate,
-        productionTime: productionTime,
-        cav1Tms1: cav1Tms1Edit,
-        cav1Tms2: cav1Tms2Edit,
-        cav1Tms3: cav1Tms3Edit,
-        cav1Tms4: cav1Tms4Edit,
-        cav1Tms5: cav1Tms5Edit,
-        cav2Tms1: cav2Tms1Edit,
-        cav2Tms2: cav2Tms2Edit,
-        cav2Tms3: cav2Tms3Edit,
-        cav2Tms4: cav2Tms4Edit,
-        cav2Tms5: cav2Tms5Edit,
-        cav3Tms1: cav3Tms1Edit,
-        cav3Tms2: cav3Tms2Edit,
-        cav3Tms3: cav3Tms3Edit,
-        cav3Tms4: cav3Tms4Edit,
-        cav3Tms5: cav3Tms5Edit,
-        cav4Tms1: cav4Tms1Edit,
-        cav4Tms2: cav4Tms2Edit,
-        cav4Tms3: cav4Tms3Edit,
-        cav4Tms4: cav4Tms4Edit,
-        cav4Tms5: cav4Tms5Edit,
-        cav1Surface: cav1SurfaceEdit,
-        cav2Surface: cav2SurfaceEdit,
-        cav3Surface: cav3SurfaceEdit,
-        cav4Surface: cav4SurfaceEdit,
-        cav1Pg1: cav1Pg1Edit,
-        cav2Pg1: cav2Pg1Edit,
-        cav3Pg1: cav3Pg1Edit,
-        cav4Pg1: cav4Pg1Edit,
-        cav1Pg2: cav1Pg2Edit,
-        cav2Pg2: cav2Pg2Edit,
-        cav3Pg2: cav3Pg2Edit,
-        cav4Pg2: cav4Pg2Edit,
-        cav1Db: cav1DbEdit,
-        cav2Db: cav2DbEdit,
-        cav3Db: cav3DbEdit,
-        cav4Db: cav4DbEdit,
-      });
-      await getAllData();
-      setIsModalDetailOpen(false);
+      let data;
+      if (partName === "Knob Manual L 1 st") {
+        data = KnobManL1stEdit;
+      } else if (partName === "Straight 3rd") {
+        data = Straight3RdEdit;
+      } else {
+        console.log("Invalid Value of partName");
+      }
+
+      if (data) {
+        await axios.patch("/api/data/updateData", data);
+        await getAllData();
+        setIsModalDetailOpen(false);
+      } else {
+        console.log("Data not found");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -421,18 +468,58 @@ export const DataFunctionContextProvider = ({ children }) => {
 
   const getDataById = async (itemId) => {
     try {
-      setIsModalDetailOpen(true);
       const response = await axios.get(`/api/data/getDataById?docId=${itemId}`);
-      setDocId(response.data.id);
-      setCav1Pg1Edit(response.data.result.cav1.pg);
-      setCav2Pg1Edit(response.data.result.cav2.pg);
-      setCav1Tms1Edit(response.data.result.cav1.tms1);
-      setCav2Tms1Edit(response.data.result.cav2.tms1);
-      setCav1Tms2Edit(response.data.result.cav1.tms2);
-      setCav2Tms2Edit(response.data.result.cav2.tms2);
-      setCav1DbEdit(response.data.result.cav1.db);
-      setCav2DbEdit(response.data.result.cav2.db);
-      console.log(docId);
+      if (partName === "Knob Manual L 1 st") {
+        setDocId(response.data.id);
+        setCav1Pg1Edit(response.data.result.cav1.pg1);
+        setCav2Pg1Edit(response.data.result.cav2.pg1);
+        setCav1Tms1Edit(response.data.result.cav1.tms1);
+        setCav2Tms1Edit(response.data.result.cav2.tms1);
+        setCav1Tms2Edit(response.data.result.cav1.tms2);
+        setCav2Tms2Edit(response.data.result.cav2.tms2);
+        setCav1DbEdit(response.data.result.cav1.db);
+        setCav2DbEdit(response.data.result.cav2.db);
+        setIsModalDetailOpen(true);
+      } else if (partName === "Straight 3rd") {
+        setDocId(response.data.id);
+        setCav1Pg1Edit(response.data.result.cav1.pg1);
+        setCav2Pg1Edit(response.data.result.cav2.pg1);
+        setCav3Pg1Edit(response.data.result.cav3.pg1);
+        setCav4Pg1Edit(response.data.result.cav4.pg1);
+        setCav1Pg2Edit(response.data.result.cav1.pg2);
+        setCav2Pg2Edit(response.data.result.cav2.pg2);
+        setCav3Pg2Edit(response.data.result.cav3.pg2);
+        setCav4Pg2Edit(response.data.result.cav4.pg2);
+        setCav1Tms1Edit(response.data.result.cav1.tms1);
+        setCav2Tms1Edit(response.data.result.cav2.tms1);
+        setCav3Tms1Edit(response.data.result.cav3.tms1);
+        setCav4Tms1Edit(response.data.result.cav4.tms1);
+        setCav1Tms2Edit(response.data.result.cav1.tms2);
+        setCav2Tms2Edit(response.data.result.cav2.tms2);
+        setCav3Tms2Edit(response.data.result.cav3.tms2);
+        setCav4Tms2Edit(response.data.result.cav4.tms2);
+        setCav1Tms3Edit(response.data.result.cav1.tms3);
+        setCav2Tms3Edit(response.data.result.cav2.tms3);
+        setCav3Tms3Edit(response.data.result.cav3.tms3);
+        setCav4Tms3Edit(response.data.result.cav4.tms3);
+        setCav1Tms4Edit(response.data.result.cav1.tms4);
+        setCav2Tms4Edit(response.data.result.cav2.tms4);
+        setCav3Tms4Edit(response.data.result.cav3.tms4);
+        setCav4Tms4Edit(response.data.result.cav4.tms4);
+        setCav1Tms5Edit(response.data.result.cav1.tms5);
+        setCav2Tms5Edit(response.data.result.cav2.tms5);
+        setCav3Tms5Edit(response.data.result.cav3.tms5);
+        setCav4Tms5Edit(response.data.result.cav4.tms5);
+        setCav1SurfaceEdit(response.data.result.cav1.surfaceTest);
+        setCav2SurfaceEdit(response.data.result.cav2.surfaceTest);
+        setCav3SurfaceEdit(response.data.result.cav3.surfaceTest);
+        setCav4SurfaceEdit(response.data.result.cav4.surfaceTest);
+        setCav1DbEdit(response.data.result.cav1.db);
+        setCav2DbEdit(response.data.result.cav2.db);
+        setCav3DbEdit(response.data.result.cav3.db);
+        setCav4DbEdit(response.data.result.cav4.db);
+        setIsModalDetailOpen(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -444,7 +531,6 @@ export const DataFunctionContextProvider = ({ children }) => {
         `/api/data/getAllData?partName=${partName}`
       );
       setAllData(response.data);
-      setDateNow(dateNow());
     } catch (error) {
       console.log(error);
     }
@@ -462,6 +548,8 @@ export const DataFunctionContextProvider = ({ children }) => {
     switchTab4,
     switchTabModal1,
     switchTabModal2,
+    switchTabModal3,
+    switchTabModal4,
   };
 
   return (

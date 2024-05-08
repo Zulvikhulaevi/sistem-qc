@@ -1,5 +1,5 @@
 import { useAllStateContext } from "@/context/AllStateContext";
-import Straight3Rd from "@/pages/qcsys/components/FormContent/Straight3Rd";
+import Straight3RdFormContent from "@/pages/qcsys/components/FormContent/Straight3Rd";
 
 const Cavity4 = () => {
   const {
@@ -25,7 +25,7 @@ const Cavity4 = () => {
 
   return (
     <>
-      <Straight3Rd
+      <Straight3RdFormContent
         title={
           <div>
             <p className="text-sm text-center font-semibold">Cavity 4</p>

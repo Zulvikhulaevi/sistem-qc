@@ -1,6 +1,6 @@
 import { useAllStateContext } from "@/context/AllStateContext";
 
-const Straight3Rd = (props) => {
+const Straight3RdFormContent = (props) => {
   const { isValueError } = useAllStateContext();
 
   return (
@@ -185,4 +185,4 @@ const Straight3Rd = (props) => {
   );
 };
 
-export default Straight3Rd;
+export default Straight3RdFormContent;

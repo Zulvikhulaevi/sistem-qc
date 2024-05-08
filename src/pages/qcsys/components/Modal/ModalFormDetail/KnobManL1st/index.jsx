@@ -3,10 +3,10 @@ import { useAllStateContext } from "@/context/AllStateContext";
 import { useDataFunctionContext } from "@/context/DataFunctionContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import Tab2List from "../../Tablist/Tab2List";
-import KnobManL1stFormContent from "../../FormContent/KnobManL1st";
+import Tab2List from "../../../Tablist/Tab2List";
+import KnobManL1stFormContent from "../../../FormContent/KnobManL1st";
 
-const ModalFormDetail = () => {
+const ModalFormDetail2List = () => {
   const {
     partName,
     cav1Pg1Edit,
@@ -21,6 +21,10 @@ const ModalFormDetail = () => {
     setCav1Tms2Edit,
     cav2Tms2Edit,
     setCav2Tms2Edit,
+    cav1DbEdit,
+    setCav1DbEdit,
+    cav2DbEdit,
+    setCav2DbEdit,
     setIsModalDetailOpen,
     isTab1ModalActive,
     isTab2ModalActive,
@@ -71,12 +75,14 @@ const ModalFormDetail = () => {
                           <hr className="border border-gray-400 my-1" />
                         </div>
                       }
-                      pgValue={cav1Pg1Edit}
-                      setPgValue={(e) => setCav1Pg1Edit(e.target.value)}
+                      pg1Value={cav1Pg1Edit}
+                      setPg1Value={(e) => setCav1Pg1Edit(e.target.value)}
                       tms1Value={cav1Tms1Edit}
                       setTms1Value={(e) => setCav1Tms1Edit(e.target.value)}
                       tms2Value={cav1Tms2Edit}
                       setTms2Value={(e) => setCav1Tms2Edit(e.target.value)}
+                      dbValue={cav1DbEdit}
+                      setDbValue={(e) => setCav1DbEdit(e.target.value)}
                     />
                   </>
                 ) : (
@@ -90,12 +96,14 @@ const ModalFormDetail = () => {
                           <hr className="border border-gray-400 my-1" />
                         </div>
                       }
-                      pgValue={cav2Pg1Edit}
-                      setPgValue={(e) => setCav2Pg1Edit(e.target.value)}
+                      pg1Value={cav2Pg1Edit}
+                      setPg1Value={(e) => setCav2Pg1Edit(e.target.value)}
                       tms1Value={cav2Tms1Edit}
                       setTms1Value={(e) => setCav2Tms1Edit(e.target.value)}
                       tms2Value={cav2Tms2Edit}
                       setTms2Value={(e) => setCav2Tms2Edit(e.target.value)}
+                      dbValue={cav2DbEdit}
+                      setDbValue={(e) => setCav2DbEdit(e.target.value)}
                     />
                   </>
                 )}
@@ -139,4 +147,4 @@ const ModalFormDetail = () => {
     </>
   );
 };
-export default ModalFormDetail;
+export default ModalFormDetail2List;
