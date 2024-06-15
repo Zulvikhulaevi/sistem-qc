@@ -15,13 +15,21 @@ export const AllStateContextProvider = ({ children }) => {
   const [isError, setIsError] = useState(false);
   const [isValueError, setIsValueError] = useState(false);
 
+  const [isModalAddNgOpen, setIsModalAddNgOpen] = useState(false);
+  const [isModalDetailNgOpen, setIsModalDetailNgOpen] = useState(false);
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
   const [allData, setAllData] = useState([]);
+  const [allDataNg, setAllDataNg] = useState([]);
 
   const [characteristicValue, setCharacteristicValue] = useState([]);
   const [toolValue, setToolValue] = useState([]);
+
+  const [partNgName, setPartNgName] = useState("");
+  const [partNgCode, setPartNgCode] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [jenisNg, setJenisNg] = useState("");
 
   const [cav1Surface, setCav1Surface] = useState(null);
   const [cav2Surface, setCav2Surface] = useState(null);
@@ -115,6 +123,7 @@ export const AllStateContextProvider = ({ children }) => {
   const [isTab4ModalActive, setIsTab4ModalActive] = useState(false);
 
   const [dateNow, setDateNow] = useState();
+  const [dateForNg, setDateForNg] = useState("");
 
   const contextValue = {
     dateNow,
@@ -305,6 +314,22 @@ export const AllStateContextProvider = ({ children }) => {
     setIsBtnAddLoading,
     isBtnLoading,
     setIsBtnLoading,
+    isModalAddNgOpen,
+    isModalDetailNgOpen,
+    setIsModalDetailNgOpen,
+    setIsModalAddNgOpen,
+    dateForNg,
+    partNgName,
+    partNgCode,
+    customer,
+    jenisNg,
+    setJenisNg,
+    setCustomer,
+    setPartNgName,
+    setPartNgCode,
+    setDateForNg,
+    allDataNg,
+    setAllDataNg,
   };
 
   return (

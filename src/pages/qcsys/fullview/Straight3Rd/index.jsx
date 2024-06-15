@@ -4,11 +4,13 @@ import ModalFormDetail4List from "@/pages/qcsys/components/Modal/ModalFormDetail
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format } from "date-fns";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Straight3RdFullView = () => {
   const { allData, isModalDetailOpen, isModalDeleteOpen } =
     useAllStateContext();
+  const { data: session } = useSession();
 
   return (
     <div className="flex min-w-full min-h-96 max-h-96 px-2">
@@ -729,14 +731,18 @@ const Straight3RdFullView = () => {
             </tr>
           </tbody>
         </table>
-        {isModalDetailOpen && <ModalFormDetail4List />}
-        {isModalDeleteOpen && <ModalDelete />}
       </div>
-      <div className="flex min-h-full items-center justify-center">
-        <Link href={"/qcsys"} className="btn btn-sm btn-base h-full ms-2">
-          <FontAwesomeIcon icon={faChevronLeft} size="xl" />
-        </Link>
-      </div>
+      {session ? (
+        <div className="flex min-h-full items-center justify-center">
+          <Link href={"/qcsys"} className="btn btn-sm btn-base h-full ms-2">
+            <FontAwesomeIcon icon={faChevronLeft} size="xl" />
+          </Link>
+        </div>
+      ) : (
+        ""
+      )}
+      {isModalDetailOpen && <ModalFormDetail4List />}
+      {isModalDeleteOpen && <ModalDelete />}
     </div>
   );
 };

@@ -16,11 +16,18 @@ export default function Home() {
         quality={100}
         alt="background"
       />
-      <div className="absolute w-full top-1/2 left-16">
+      <div className="absolute w-full top-64 left-16">
         <Link
           href={session ? "/qcsys" : "/auth/login"}
           className="btn btn-lg glass btn-wide text-white font-bold px-4 py-2 rounded">
           QC Input
+        </Link>
+      </div>
+      <div className="absolute w-full top-1/2 left-16 mt-2">
+        <Link
+          href={"/qcsys/fullview"}
+          className="btn btn-lg glass btn-wide text-white font-bold px-4 py-2 rounded">
+          MONITORING
         </Link>
       </div>
       <Footer />

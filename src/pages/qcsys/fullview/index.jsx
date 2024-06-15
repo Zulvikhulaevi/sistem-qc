@@ -25,7 +25,7 @@ const QcDataView = () => {
   };
   return (
     <div className="container min-w-full min-h-screen p-3">
-      <div className="w-full border rounded">
+      <div className="w-full border rounded pb-3">
         <Header />
         <hr className="border mt-2 mb-2 mx-2" />
         {getPartByName()}

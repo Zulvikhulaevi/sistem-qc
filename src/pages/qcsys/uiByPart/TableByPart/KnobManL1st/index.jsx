@@ -7,7 +7,7 @@ import { format } from "date-fns";
 const KnobManL1stData = (props) => {
   const { allData, isModalDetailOpen, isModalDeleteOpen } =
     useAllStateContext();
-  const { getDataById } = useDataFunctionContext();
+  const { getDataById, deleteData } = useDataFunctionContext();
 
   return (
     <div className="flex min-h-96 min-w-full px-2 overflow-x-auto">
@@ -258,7 +258,7 @@ const KnobManL1stData = (props) => {
         {props.backBtn}
       </div>
       {isModalDetailOpen && <ModalFormDetail2List />}
-      {isModalDeleteOpen && <ModalDelete />}
+      {isModalDeleteOpen && <ModalDelete clickFunction={deleteData} />}
     </div>
   );
 };

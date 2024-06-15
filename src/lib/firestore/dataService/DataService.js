@@ -109,6 +109,33 @@ export async function addData(
   }
 }
 
+export async function addDataNg(
+  name,
+  nik,
+  date,
+  partNgName,
+  partNgCode,
+  customer,
+  jenisNg
+) {
+  try {
+    const docRef = collection(firestore, "PPQS");
+    const snapshot = await addDoc(docRef, {
+      nama: name,
+      nik: nik,
+      date: date,
+      namaPart: partNgName,
+      kodePart: partNgCode,
+      customer: customer,
+      jenisNG: jenisNg,
+    });
+    return snapshot;
+  } catch (error) {
+    console.error("Error adding document to Firestore:", error);
+    throw new Error("Failed to add document to Firestore");
+  }
+}
+
 export async function updateData(data) {
   try {
     let measurementData;
@@ -220,10 +247,76 @@ export async function getDataById(docId) {
   }
 }
 
+export async function updateDataNg(
+  docId,
+  date,
+  partNgName,
+  partNgCode,
+  customer,
+  jenisNg
+) {
+  try {
+    const docRef = doc(firestore, "PPQS", docId);
+    const snapshot = await updateDoc(docRef, {
+      date: date,
+      namaPart: partNgName,
+      kodePart: partNgCode,
+      customer: customer,
+      jenisNG: jenisNg,
+    });
+    return snapshot;
+  } catch (error) {
+    console.error("Error updating document:", error);
+    throw new Error("Failed to add document subcollection to Firestore");
+  }
+}
+
+export async function deleteDataNg(docId) {
+  try {
+    const docRef = doc(firestore, "PPQS", docId);
+    await deleteDoc(docRef);
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    throw new Error("Failed to delete data");
+  }
+}
+
+export async function getDataNgById(docId) {
+  try {
+    const docRef = doc(firestore, "PPQS", docId);
+    const snapshot = await getDoc(docRef);
+    if (snapshot.exists()) {
+      return { id: snapshot.id, ...snapshot.data() };
+    } else {
+      throw new Error("document does not exist");
+    }
+  } catch (error) {
+    console.error("Error fetching document ID:", error);
+    throw new Error("Failed to fetch document ID from Firestore");
+  }
+}
+
 export async function getAllData(partName) {
   try {
     const docRef = collection(firestore, "QcData");
     const q = query(docRef, where("result.partName", "==", partName));
+    const snapshot = await getDocs(q);
+
+    const subData = [];
+    snapshot.forEach((doc) => {
+      subData.push({ id: doc.id, ...doc.data() });
+    });
+    return subData;
+  } catch (error) {
+    console.error("Error fetching document data:", error);
+    throw new Error("Failed to fetch document data from Firestore");
+  }
+}
+
+export async function getAllDataNg(userName) {
+  try {
+    const docRef = collection(firestore, "PPQS");
+    const q = query(docRef, where("nama", "==", userName));
     const snapshot = await getDocs(q);
 
     const subData = [];

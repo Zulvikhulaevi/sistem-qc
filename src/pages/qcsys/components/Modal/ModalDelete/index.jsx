@@ -1,10 +1,8 @@
 import Modal from "@/components/Modal";
 import { useAllStateContext } from "@/context/AllStateContext";
-import { useDataFunctionContext } from "@/context/DataFunctionContext";
 
-const ModalDelete = () => {
+const ModalDelete = (props) => {
   const { setIsModalDeleteOpen } = useAllStateContext();
-  const { deleteData } = useDataFunctionContext();
   return (
     <>
       <Modal
@@ -26,7 +24,7 @@ const ModalDelete = () => {
                   Tidak
                 </button>
                 <button
-                  onClick={deleteData}
+                  onClick={props.clickFunction}
                   className="btn btn-sm btn-error ms-2">
                   Ya
                 </button>

@@ -11,6 +11,7 @@ export const DataFunctionContextProvider = ({ children }) => {
     setIsBtnAddLoading,
     setIsModalDetailOpen,
     setIsModalDeleteOpen,
+    setIsModalDetailNgOpen,
     docId,
     setDocId,
     partName,
@@ -135,6 +136,18 @@ export const DataFunctionContextProvider = ({ children }) => {
     setCav2DbEdit,
     setCav3DbEdit,
     setCav4DbEdit,
+    partNgName,
+    partNgCode,
+    customer,
+    jenisNg,
+    dateForNg,
+    setIsModalAddNgOpen,
+    setAllDataNg,
+    setJenisNg,
+    setCustomer,
+    setPartNgName,
+    setPartNgCode,
+    setDateForNg,
   } = useAllStateContext();
 
   const KnobManL1st = {
@@ -536,12 +549,93 @@ export const DataFunctionContextProvider = ({ children }) => {
     }
   };
 
+  const addDataNg = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/api/data/addDataNg", {
+        name: session?.user.nama,
+        nik: session?.user.nik,
+        date: dateForNg,
+        partNgName: partNgName,
+        partNgCode: partNgCode,
+        customer: customer,
+        jenisNg: jenisNg,
+      });
+      await getAllDataNg();
+      setIsModalAddNgOpen(false);
+    } catch (error) {
+      setIsModalAddNgOpen(false);
+      console.log(error);
+    }
+  };
+
+  const getAllDataNg = async () => {
+    const userName = session?.user.nama;
+    try {
+      const response = await axios.get(
+        `/api/data/getAllDataNg?userName=${userName}`
+      );
+      setAllDataNg(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getDataNgById = async (itemId) => {
+    setDocId(itemId);
+    try {
+      const response = await axios.get(
+        `/api/data/getDataNgById?docId=${itemId}`
+      );
+      setPartNgName(response.data.namaPart),
+        setPartNgCode(response.data.kodePart),
+        setCustomer(response.data.customer),
+        setJenisNg(response.data.jenisNG),
+        setDateForNg(response.data.date);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateDataNg = async () => {
+    try {
+      await axios.patch("/api/data/updateDataNg", {
+        docId: docId,
+        date: dateForNg,
+        partNgName: partNgName,
+        partNgCode: partNgCode,
+        customer: customer,
+        jenisNg: jenisNg,
+      });
+      await getAllDataNg();
+      setIsModalDetailNgOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteDataNg = async () => {
+    try {
+      await axios.delete(`/api/data/deleteDataNg?docId=${docId}`);
+      await getAllDataNg();
+      setIsModalDeleteOpen(false);
+      setIsModalDetailNgOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const contextValue = {
     addData,
+    addDataNg,
     updateData,
     deleteData,
+    deleteDataNg,
     getDataById,
+    getDataNgById,
     getAllData,
+    getAllDataNg,
+    updateDataNg,
     switchTab1,
     switchTab2,
     switchTab3,

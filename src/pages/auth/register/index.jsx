@@ -6,19 +6,22 @@ const RegisterPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const form = event.target;
+      const userData = {
+        nik: form.nik.value,
+        password: form.password.value,
+      };
 
-    const form = event.target;
-    const data = {
-      nik: form.nik.value,
-      password: form.password.value,
-    };
-
-    const result = await axios.post("/api/auth/register", data);
-    if (result.status === 200) {
-      form.reset();
-      push("/");
-    } else {
-      console.log("Register Failed");
+      const result = await axios.post("/api/auth/register", userData);
+      if (result.status === 200) {
+        form.reset();
+        push("/");
+      } else {
+        console.log("Register Failed");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

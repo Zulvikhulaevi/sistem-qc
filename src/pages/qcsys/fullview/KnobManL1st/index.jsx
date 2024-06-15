@@ -4,11 +4,13 @@ import ModalFormDetail2List from "@/pages/qcsys/components/Modal/ModalFormDetail
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format } from "date-fns";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const KnobManL1stFullView = () => {
   const { allData, isModalDetailOpen, isModalDeleteOpen } =
     useAllStateContext();
+  const { data: session } = useSession();
 
   return (
     <div className="flex min-h-96 min-w-full px-2 overflow-x-auto">
@@ -235,11 +237,15 @@ const KnobManL1stFullView = () => {
           </tr>
         </tbody>
       </table>
-      <div className="flex min-h-full items-center justify-center">
-        <Link href={"/qcsys"} className="btn btn-sm btn-base h-full ms-1">
-          <FontAwesomeIcon icon={faChevronLeft} size="xl" />
-        </Link>
-      </div>
+      {session ? (
+        <div className="flex min-h-full items-center justify-center">
+          <Link href={"/qcsys"} className="btn btn-sm btn-base h-full ms-1">
+            <FontAwesomeIcon icon={faChevronLeft} size="xl" />
+          </Link>
+        </div>
+      ) : (
+        ""
+      )}
       {isModalDetailOpen && <ModalFormDetail2List />}
       {isModalDeleteOpen && <ModalDelete />}
     </div>

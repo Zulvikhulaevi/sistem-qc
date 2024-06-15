@@ -7,7 +7,7 @@ import { format } from "date-fns";
 const Straight3RdData = (props) => {
   const { allData, isModalDetailOpen, isModalDeleteOpen } =
     useAllStateContext();
-  const { getDataById } = useDataFunctionContext();
+  const { getDataById, deleteData } = useDataFunctionContext();
 
   return (
     <div className="flex min-w-full min-h-96 max-h-96 px-2">
@@ -777,7 +777,7 @@ const Straight3RdData = (props) => {
           </tbody>
         </table>
         {isModalDetailOpen && <ModalFormDetail4List />}
-        {isModalDeleteOpen && <ModalDelete />}
+        {isModalDeleteOpen && <ModalDelete clickFunction={deleteData} />}
       </div>
       <div className="flex min-h-full items-center justify-center">
         {props.backBtn}
