@@ -313,11 +313,10 @@ export async function getAllData(partName) {
   }
 }
 
-export async function getAllDataNg(userName) {
+export async function getAllDataNg() {
   try {
     const docRef = collection(firestore, "PPQS");
-    const q = query(docRef, where("nama", "==", userName));
-    const snapshot = await getDocs(q);
+    const snapshot = await getDocs(docRef);
 
     const subData = [];
     snapshot.forEach((doc) => {

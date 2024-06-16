@@ -1,5 +1,5 @@
 import { useAllStateContext } from "@/context/AllStateContext";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeftLong, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
 import ModalAddNg from "../components/Modal/ModalAddNg";
@@ -11,6 +11,7 @@ import ModalNgDetail from "../components/Modal/ModalNgDetail";
 import ModalDelete from "../components/Modal/ModalDelete";
 import Image from "next/image";
 import ModalAttachmentDetail from "../components/Modal/ModalAttachmentDetail";
+import Link from "next/link";
 
 const NgReport = () => {
   const { data: session } = useSession();
@@ -23,6 +24,7 @@ const NgReport = () => {
     isModalDeleteOpen,
     setIsModalDeleteOpen,
     isModalAttachmentDetailOpen,
+    setIsModalAttachmentDetailOpen,
   } = useAllStateContext();
   const { getAllDataNg, getDataNgById, deleteDataNg } =
     useDataFunctionContext();
@@ -37,43 +39,58 @@ const NgReport = () => {
       <div className="p-3">
         <div className="border rounded-lg p-3">
           <div className="flex justify-between w-full">
-            <h1 className="font-semibold">Laporan NG</h1>
-            <div>
-              <p className="text-sm text-primary">
-                {session?.user.nama} / {session?.user.nik}
-              </p>
-              <p className="text-sm text-center text-primary"></p>
+            <div className="flex items-center">
+              <Link href={"/qcsys/fullview"} className="btn btn-sm btn-circle">
+                <FontAwesomeIcon icon={faArrowLeftLong} />
+              </Link>
+              <h1 className="font-semibold ms-2">Laporan NG</h1>
             </div>
+            {session ? (
+              <div>
+                <p className="text-sm text-primary">
+                  {session?.user.nama} / {session?.user.nik}
+                </p>
+                <p className="text-sm text-center text-primary"></p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <hr className="my-3" />
-          <div className="flex justify-between">
-            <button
-              onClick={() => setIsModalAddNgOpen(true)}
-              className="btn btn-sm btn-primary shadow-md">
-              Tambah
-              <span>
-                <FontAwesomeIcon icon={faPlus} />
-              </span>
-            </button>
-          </div>
+          {session ? (
+            <div className="flex">
+              <button
+                onClick={() => setIsModalAddNgOpen(true)}
+                className="btn btn-sm btn-primary shadow-md">
+                Tambah
+                <span>
+                  <FontAwesomeIcon icon={faPlus} />
+                </span>
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
           <div className="mt-2">
             <table className="table border">
               <thead>
                 <tr>
                   <th className="text-center">No</th>
+                  <th className="text-center">Inspector</th>
                   <th className="text-center">Nama Part</th>
                   <th className="text-center">Kode Part</th>
                   <th className="text-center">Customer</th>
                   <th className="text-center">Jenis NG</th>
                   <th className="text-center">Tanggal</th>
                   <th className="text-center">Lampiran</th>
-                  <th className="text-center">Action</th>
+                  {session ? <th className="text-center">Action</th> : ""}
                 </tr>
               </thead>
               <tbody>
                 {allDataNg.map((item, index) => (
                   <tr key={item.id}>
                     <td className="text-center">{index + 1}</td>
+                    <td className="text-center">{item.nama}</td>
                     <td className="text-center">{item.namaPart}</td>
                     <td className="text-center">{item.kodePart}</td>
                     <td className="text-center">{item.customer}</td>
@@ -81,7 +98,12 @@ const NgReport = () => {
                     <td className="text-center">
                       {format(Date(item.date), "dd/MM/yyyy")}
                     </td>
-                    <td className="flex justify-center">
+                    <td
+                      onClick={() => {
+                        setIsModalAttachmentDetailOpen(true);
+                        getDataNgById(item.id);
+                      }}
+                      className="cursor-pointer hover:bg-slate-300 flex justify-center">
                       <Image
                         src={item.imageData.url}
                         width={80}
@@ -89,24 +111,28 @@ const NgReport = () => {
                         alt="attachment"
                       />
                     </td>
-                    <td className="text-center">
-                      <button
-                        onClick={() => {
-                          setIsModalDetailNgOpen(true);
-                          getDataNgById(item.id);
-                        }}
-                        className="btn btn-sm btn-primary">
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                      </button>
-                      <button
-                        onClick={() => {
-                          setIsModalDeleteOpen(true);
-                          getDataNgById(item.id);
-                        }}
-                        className="btn btn-sm btn-error ms-1 text-white">
-                        <FontAwesomeIcon icon={faTrashCan} />
-                      </button>
-                    </td>
+                    {session ? (
+                      <td className="text-center">
+                        <button
+                          onClick={() => {
+                            setIsModalDetailNgOpen(true);
+                            getDataNgById(item.id);
+                          }}
+                          className="btn btn-sm btn-primary">
+                          <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setIsModalDeleteOpen(true);
+                            getDataNgById(item.id);
+                          }}
+                          className="btn btn-sm btn-error ms-1 text-white">
+                          <FontAwesomeIcon icon={faTrashCan} />
+                        </button>
+                      </td>
+                    ) : (
+                      ""
+                    )}
                   </tr>
                 ))}
               </tbody>

@@ -130,6 +130,7 @@ export const AllStateContextProvider = ({ children }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [imageName, setImageName] = useState("");
   const [isImageSizeError, setIsImageSizeError] = useState(false);
+  const [isPpqsPage, setIsPpqsPage] = useState(false);
 
   const contextValue = {
     dateNow,
@@ -346,6 +347,8 @@ export const AllStateContextProvider = ({ children }) => {
     setIsImageSizeError,
     isModalAttachmentDetailOpen,
     setIsModalAttachmentDetailOpen,
+    isPpqsPage,
+    setIsPpqsPage,
   };
 
   return (

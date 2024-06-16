@@ -610,11 +610,8 @@ export const DataFunctionContextProvider = ({ children }) => {
   };
 
   const getAllDataNg = async () => {
-    const userName = session?.user.nama;
     try {
-      const response = await axios.get(
-        `/api/data/getAllDataNg?userName=${userName}`
-      );
+      const response = await axios.get(`/api/data/getAllDataNg`);
       setAllDataNg(response.data);
     } catch (error) {
       console.log(error);
