@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 
 const DataFunctionContext = createContext();
 
+const MAX_FILE_SIZE_MB = 1;
+
 export const DataFunctionContextProvider = ({ children }) => {
   const { data: session } = useSession();
   const {
@@ -148,6 +150,13 @@ export const DataFunctionContextProvider = ({ children }) => {
     setPartNgName,
     setPartNgCode,
     setDateForNg,
+    image,
+    setImage,
+    setImageUrl,
+    imageName,
+    setImageName,
+    isImageSizeError,
+    setIsImageSizeError,
   } = useAllStateContext();
 
   const KnobManL1st = {
@@ -552,17 +561,48 @@ export const DataFunctionContextProvider = ({ children }) => {
   const addDataNg = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/data/addDataNg", {
-        name: session?.user.nama,
-        nik: session?.user.nik,
-        date: dateForNg,
-        partNgName: partNgName,
-        partNgCode: partNgCode,
-        customer: customer,
-        jenisNg: jenisNg,
-      });
-      await getAllDataNg();
-      setIsModalAddNgOpen(false);
+      if (!isImageSizeError) {
+        const response = await axios.post("/api/data/addDataNg", {
+          name: session?.user.nama,
+          nik: session?.user.nik,
+          date: dateForNg,
+          partNgName: partNgName,
+          partNgCode: partNgCode,
+          customer: customer,
+          jenisNg: jenisNg,
+        });
+        const { docId } = response.data;
+        setDocId(docId);
+
+        try {
+          if (image !== null) {
+            const formData = new FormData();
+
+            formData.append("docId", docId);
+            formData.append("imageToUpload", image);
+
+            const response = await axios.post(
+              "/api/data/uploadImage",
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+            );
+            const { url } = response.data;
+            setImageUrl(url);
+          } else {
+            console.log("Upload Failed!");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        await getAllDataNg();
+        setIsModalAddNgOpen(false);
+      } else {
+        setImage([null]);
+      }
     } catch (error) {
       setIsModalAddNgOpen(false);
       console.log(error);
@@ -591,7 +631,9 @@ export const DataFunctionContextProvider = ({ children }) => {
         setPartNgCode(response.data.kodePart),
         setCustomer(response.data.customer),
         setJenisNg(response.data.jenisNG),
-        setDateForNg(response.data.date);
+        setDateForNg(response.data.date),
+        setImageName(response.data.imageData.name),
+        setImageUrl(response.data.imageData.url);
     } catch (error) {
       console.log(error);
     }
@@ -617,6 +659,7 @@ export const DataFunctionContextProvider = ({ children }) => {
   const deleteDataNg = async () => {
     try {
       await axios.delete(`/api/data/deleteDataNg?docId=${docId}`);
+      await deleteImage(`NG_Image/${imageName}`);
       await getAllDataNg();
       setIsModalDeleteOpen(false);
       setIsModalDetailNgOpen(false);
@@ -625,8 +668,30 @@ export const DataFunctionContextProvider = ({ children }) => {
     }
   };
 
+  const handleChangeImage = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile && selectedFile.size / (1024 * 1024) > MAX_FILE_SIZE_MB) {
+      setIsImageSizeError(true);
+    } else {
+      setIsImageSizeError(false);
+      setImage(selectedFile);
+    }
+  };
+
+  const deleteImage = async (filePath) => {
+    try {
+      const response = await axios.delete("/api/data/deleteImage", {
+        data: { filePath },
+      });
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Error deleting file:", error);
+    }
+  };
+
   const contextValue = {
     addData,
+    handleChangeImage,
     addDataNg,
     updateData,
     deleteData,

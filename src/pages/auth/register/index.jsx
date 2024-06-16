@@ -8,12 +8,12 @@ const RegisterPage = () => {
     event.preventDefault();
     try {
       const form = event.target;
-      const userData = {
+      const data = {
         nik: form.nik.value,
         password: form.password.value,
       };
 
-      const result = await axios.post("/api/auth/register", userData);
+      const result = await axios.post("/api/auth/register", data);
       if (result.status === 200) {
         form.reset();
         push("/");
@@ -44,7 +44,9 @@ const RegisterPage = () => {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-semibold text-lg">Password</span>
+              <span className="label-text font-semibold text-lg">
+                Password Baru
+              </span>
             </label>
             <input
               type="password"

@@ -18,7 +18,6 @@ const formidableConfig = {
 
 export default async function handlerUploadImage(req, res) {
   if (req.method !== "POST") {
-    console.log("Method not allowed");
     return res.status(405).end();
   }
 
@@ -33,9 +32,15 @@ export default async function handlerUploadImage(req, res) {
     }
 
     const imageToUpload = files.imageToUpload;
+    let docId = fields.docId;
+
     if (!imageToUpload) {
       console.error("No file uploaded");
       return res.status(400).json({ error: "Tidak ada file yang diunggah" });
+    }
+
+    if (Array.isArray(docId)) {
+      docId = docId[0];
     }
 
     const fileObject = Array.isArray(imageToUpload)
@@ -43,10 +48,11 @@ export default async function handlerUploadImage(req, res) {
       : imageToUpload;
 
     try {
-      const result = await uploadImage(fileObject);
-      res
-        .status(200)
-        .json({ message: "File berhasil diunggah", url: result.url });
+      const result = await uploadImage(fileObject, docId);
+      res.status(200).json({
+        message: "File berhasil diunggah",
+        url: result.url,
+      });
     } catch (error) {
       console.error("Terjadi kesalahan saat mengunggah file:", error);
       res.status(500).json({ error: "Terjadi kesalahan saat mengunggah file" });

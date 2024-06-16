@@ -30,7 +30,7 @@ const Header = (props) => {
         <div className="flex flex-col ms-2">{props.timeInput}</div>
       </div>
       <div className="flex flex-col rounded-lg me-4">
-        <p className="text-sm text-primary">{session?.user.nama}</p>
+        <p className="text-sm text-center text-primary">{session?.user.nama}</p>
         <hr />
         <p className="text-sm text-end text-primary">{session?.user.nik}</p>
       </div>

@@ -9,6 +9,8 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { format } from "date-fns";
 import ModalNgDetail from "../components/Modal/ModalNgDetail";
 import ModalDelete from "../components/Modal/ModalDelete";
+import Image from "next/image";
+import ModalAttachmentDetail from "../components/Modal/ModalAttachmentDetail";
 
 const NgReport = () => {
   const { data: session } = useSession();
@@ -20,6 +22,7 @@ const NgReport = () => {
     setIsModalDetailNgOpen,
     isModalDeleteOpen,
     setIsModalDeleteOpen,
+    isModalAttachmentDetailOpen,
   } = useAllStateContext();
   const { getAllDataNg, getDataNgById, deleteDataNg } =
     useDataFunctionContext();
@@ -63,6 +66,7 @@ const NgReport = () => {
                   <th className="text-center">Customer</th>
                   <th className="text-center">Jenis NG</th>
                   <th className="text-center">Tanggal</th>
+                  <th className="text-center">Lampiran</th>
                   <th className="text-center">Action</th>
                 </tr>
               </thead>
@@ -76,6 +80,14 @@ const NgReport = () => {
                     <td className="text-center">{item.jenisNG}</td>
                     <td className="text-center">
                       {format(Date(item.date), "dd/MM/yyyy")}
+                    </td>
+                    <td className="flex justify-center">
+                      <Image
+                        src={item.imageData.url}
+                        width={80}
+                        height={80}
+                        alt="attachment"
+                      />
                     </td>
                     <td className="text-center">
                       <button
@@ -104,6 +116,7 @@ const NgReport = () => {
       </div>
       {isModalAddNgOpen && <ModalAddNg />}
       {isModalDetailNgOpen && <ModalNgDetail />}
+      {isModalAttachmentDetailOpen && <ModalAttachmentDetail />}
       {isModalDeleteOpen && <ModalDelete clickFunction={deleteDataNg} />}
     </div>
   );

@@ -3,9 +3,10 @@ import Header from "../../components/Header";
 import KnobManL1stData from "../../uiByPart/TableByPart/KnobManL1st";
 import Straight3RdData from "../../uiByPart/TableByPart/Straight3Rd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExpand } from "@fortawesome/free-solid-svg-icons";
+import { faClipboard, faExpand } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useDataFunctionContext } from "@/context/DataFunctionContext";
+import { faFileClipboard } from "@fortawesome/free-regular-svg-icons";
 
 const DataView = () => {
   const {
@@ -68,7 +69,12 @@ const DataView = () => {
         }
       />
       <hr className="border mt-1 mb-1 mx-2" />
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between">
+        <Link
+          href={"/qcsys/ppqs"}
+          className="link font-semibold underline underline-offset-2 text-blue-500 mb-1 ms-2.5">
+          PPQS
+        </Link>
         <Link href={"/qcsys/fullview"} className="btn btn-sm btn-ghost mb-1">
           <FontAwesomeIcon icon={faExpand} size="lg" />
         </Link>

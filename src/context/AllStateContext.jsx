@@ -16,6 +16,8 @@ export const AllStateContextProvider = ({ children }) => {
   const [isValueError, setIsValueError] = useState(false);
 
   const [isModalAddNgOpen, setIsModalAddNgOpen] = useState(false);
+  const [isModalAttachmentDetailOpen, setIsModalAttachmentDetailOpen] =
+    useState(false);
   const [isModalDetailNgOpen, setIsModalDetailNgOpen] = useState(false);
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
@@ -124,12 +126,20 @@ export const AllStateContextProvider = ({ children }) => {
 
   const [dateNow, setDateNow] = useState();
   const [dateForNg, setDateForNg] = useState("");
+  const [image, setImage] = useState([null]);
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageName, setImageName] = useState("");
+  const [isImageSizeError, setIsImageSizeError] = useState(false);
 
   const contextValue = {
     dateNow,
     setDateNow,
     docId,
     setDocId,
+    image,
+    imageUrl,
+    setImageUrl,
+    setImage,
     isError,
     setIsError,
     isValueError,
@@ -330,6 +340,12 @@ export const AllStateContextProvider = ({ children }) => {
     setDateForNg,
     allDataNg,
     setAllDataNg,
+    imageName,
+    setImageName,
+    isImageSizeError,
+    setIsImageSizeError,
+    isModalAttachmentDetailOpen,
+    setIsModalAttachmentDetailOpen,
   };
 
   return (

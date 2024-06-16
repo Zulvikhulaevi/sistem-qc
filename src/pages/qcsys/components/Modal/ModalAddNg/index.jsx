@@ -1,10 +1,7 @@
 import Modal from "@/components/Modal";
 import { useAllStateContext } from "@/context/AllStateContext";
 import { useDataFunctionContext } from "@/context/DataFunctionContext";
-import { faRepeat } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
 
 const ModalAddNg = () => {
   const { data: session } = useSession();
@@ -20,17 +17,27 @@ const ModalAddNg = () => {
     setPartNgCode,
     dateForNg,
     setDateForNg,
-    isJenisNgOthers,
-    setIsJenisNgOthers,
+    isImageSizeError,
   } = useAllStateContext();
-
-  const { addDataNg } = useDataFunctionContext();
+  const { addDataNg, handleChangeImage } = useDataFunctionContext();
 
   const handlePartCode = () => {
     if (partNgName === "Knob Manual L 1st") {
       setPartNgCode("515831-0031");
+    } else if (partNgName === "Knob Auto L") {
+      setPartNgCode("515832-0020");
+    } else if (partNgName === "Knob Auto R") {
+      setPartNgCode("515831-0020");
+    } else if (partNgName === "Knob Window Lock") {
+      setPartNgCode("515831-0050");
     } else if (partNgName === "Straight 3rd") {
       setPartNgCode("Q3ID-019A");
+    } else if (partNgName === "Checker") {
+      setPartNgCode("Q3ID-020A");
+    } else if (partNgName === "Collar") {
+      setPartNgCode("Q3ID-021A");
+    } else if (partNgName === "Elbow") {
+      setPartNgCode("Q3ID-022A");
     } else {
       setPartNgCode("Pilih Part!");
     }
@@ -80,7 +87,13 @@ const ModalAddNg = () => {
                     <option value={"Knob Manual L 1st"}>
                       Knob Manual L 1st
                     </option>
+                    <option value={"Knob Auto L"}>Knob Auto L</option>
+                    <option value={"Knob Auto R"}>Knob Auto R</option>
+                    <option value={"Knob Window Lock"}>Knob Window Lock</option>
                     <option value={"Straight 3rd"}>Straight 3rd</option>
+                    <option value={"Checker"}>Checker</option>
+                    <option value={"Collar"}>Collar</option>
+                    <option value={"Elbow"}>Elbow</option>
                   </select>
                 </div>
                 <div className="flex flex-col mt-2">
@@ -103,6 +116,9 @@ const ModalAddNg = () => {
                     <option>Pilih Customer</option>
                     <option value={"TRI"}>TRI</option>
                     <option value={"TRHI"}>TRHI</option>
+                    <option value={"STEP"}>STEP</option>
+                    <option value={"CABININDO"}>CABININDO</option>
+                    <option value={"ANI"}>ANI</option>
                   </select>
                 </div>
                 <div className="flex flex-col min-w-full mt-2">
@@ -119,6 +135,24 @@ const ModalAddNg = () => {
                     <option value={"Dented"}>Dented</option>
                     <option value={"Others"}>Others</option>
                   </select>
+                </div>
+                <div className="flex flex-col min-w-full mt-2">
+                  <label className="mb-1">Lampiran :</label>
+                  <input
+                    type="file"
+                    onChange={handleChangeImage}
+                    className="file-input file-input-sm file-input-bordered"
+                    required
+                  />
+                </div>
+                <div>
+                  {isImageSizeError ? (
+                    <p className="text-sm font-semibold text-error mt-2">
+                      Ukuran file terlalu besar!
+                    </p>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <hr className="mt-2" />

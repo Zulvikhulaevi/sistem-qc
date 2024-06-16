@@ -61,6 +61,7 @@ export async function signUp(userData, callback) {
         created_at: new Date(),
         updated_at: new Date(),
       });
+      console.log(userDoc);
       callback(true);
     } else {
       callback(false);
