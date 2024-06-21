@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { createContext, useContext } from "react";
 import { useAllStateContext } from "./AllStateContext";
 import { useSession } from "next-auth/react";
+import jsPDF from "jspdf";
+import { format } from "date-fns";
 
 const DataFunctionContext = createContext();
 
@@ -686,6 +688,113 @@ export const DataFunctionContextProvider = ({ children }) => {
     }
   };
 
+  const exportToPdf = async (itemId) => {
+    try {
+      const response = await axios.get(
+        `/api/data/getDataNgById?docId=${itemId}`
+      );
+
+      const doc = new jsPDF();
+
+      const addHeader = () => {
+        const img = new Image();
+        const logoUrl = "/static/assets/logo.jpg";
+        img.src = logoUrl;
+
+        img.onload = () => {
+          doc.addImage(img, "jpg", 10, 1, 98, 25);
+          doc.setFontSize(11);
+          doc.text("Kawasan EJIP Plot. 8C No. A4-A5", 13, 26);
+          doc.text(
+            "Jalan Ciujung, Sukaresmi, Cikarang Selatan, Sukaresmi",
+            13,
+            32
+          );
+          doc.text("Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17550", 13, 38);
+          doc.setLineWidth(0.3);
+          doc.line(13, 41, 204, 41);
+
+          addContent();
+        };
+      };
+
+      const addContent = () => {
+        const getCurrentDate = () => {
+          const today = new Date();
+          const day = String(today.getDate()).padStart(2, "0");
+          const month = String(today.getMonth() + 1).padStart(2, "0");
+          const year = today.getFullYear();
+
+          return `${day}/${month}/${year}`;
+        };
+
+        const currentDate = getCurrentDate();
+
+        doc.setFontSize(12);
+        const headerText = "PART ABNORMALITY PROCEDURE QUALITY SYSTEM (PPQS)";
+        const startX = 46;
+        const startY = 52;
+        doc.text(headerText, startX, startY);
+
+        const textWidth = doc.getTextWidth(headerText);
+        doc.line(startX, startY + 2, startX + textWidth, startY + 2);
+
+        doc.text("Date", 14, 66);
+        doc.text(
+          `: ${format(new Date(response.data.date), "dd/MM/yyyy")}`,
+          40,
+          66
+        );
+        doc.text("Part Name", 14, 74);
+        doc.text(`: ${response.data.namaPart}`, 40, 74);
+        doc.text("Part No.", 14, 82);
+        doc.text(`: ${response.data.kodePart}`, 40, 82);
+        doc.text("Customer", 14, 90);
+        doc.text(`: ${response.data.customer}`, 40, 90);
+        doc.text("NG Type", 14, 98);
+        doc.text(`: ${response.data.jenisNG}`, 40, 98);
+
+        doc.setLineWidth(0.3);
+        doc.line(13, 108, 204, 108);
+
+        doc.setFontSize(12);
+        const headerText2 = "PROCESS ABNORMALITY IDENTIFICATION";
+        const startX2 = 66;
+        const startY2 = 119;
+        doc.text(headerText2, startX2, startY2);
+
+        const textWidth2 = doc.getTextWidth(headerText2);
+        doc.line(startX2, startY2 + 2, startX2 + textWidth2, startY2 + 2);
+
+        doc.text("Date", 14, 132);
+        doc.text(":", 52, 132);
+        doc.text("Cause Of Defect", 14, 140);
+        doc.text(":", 52, 140);
+        doc.text("Action", 14, 190);
+        doc.text(":", 52, 190);
+
+        doc.setFontSize(12);
+        doc.text("Bekasi,", 158, 242);
+        doc.text(currentDate, 172, 242);
+        doc.text("PIC", 174, 270);
+
+        const pageCount = doc.internal.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+          doc.setPage(i);
+          doc.text(
+            `Page ${i} of ${pageCount}`,
+            14,
+            doc.internal.pageSize.height - 10
+          );
+        }
+        doc.save("report_ppqs.pdf");
+      };
+      addHeader();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const contextValue = {
     addData,
     handleChangeImage,
@@ -698,6 +807,7 @@ export const DataFunctionContextProvider = ({ children }) => {
     getAllData,
     getAllDataNg,
     updateDataNg,
+    exportToPdf,
     switchTab1,
     switchTab2,
     switchTab3,

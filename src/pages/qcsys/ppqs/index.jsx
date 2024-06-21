@@ -1,5 +1,9 @@
 import { useAllStateContext } from "@/context/AllStateContext";
-import { faArrowLeftLong, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeftLong,
+  faFileExport,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
 import ModalAddNg from "../components/Modal/ModalAddNg";
@@ -12,6 +16,7 @@ import ModalDelete from "../components/Modal/ModalDelete";
 import Image from "next/image";
 import ModalAttachmentDetail from "../components/Modal/ModalAttachmentDetail";
 import Link from "next/link";
+import { getDataNgById } from "@/lib/firestore/dataService/DataService";
 
 const NgReport = () => {
   const { data: session } = useSession();
@@ -26,8 +31,17 @@ const NgReport = () => {
     isModalAttachmentDetailOpen,
     setIsModalAttachmentDetailOpen,
   } = useAllStateContext();
-  const { getAllDataNg, getDataNgById, deleteDataNg } =
+  const { getAllDataNg, getDataNgById, deleteDataNg, exportToPdf } =
     useDataFunctionContext();
+
+  const handlePdf = async (id) => {
+    try {
+      await getDataNgById(id);
+      exportToPdf();
+    } catch (error) {
+      console.error("Error executing functions", error);
+    }
+  };
 
   useEffect(() => {
     getAllDataNg();
@@ -38,12 +52,14 @@ const NgReport = () => {
     <div className="w-full">
       <div className="p-3">
         <div className="border rounded-lg p-3">
-          <div className="flex justify-between w-full">
+          <div className="flex items-center justify-between w-full">
             <div className="flex items-center">
               <Link href={"/qcsys/fullview"} className="btn btn-sm btn-circle">
                 <FontAwesomeIcon icon={faArrowLeftLong} />
               </Link>
-              <h1 className="font-semibold ms-2">Laporan NG</h1>
+              <h1 className=" text-sm lg:text-lg font-semibold ms-2">
+                Laporan NG
+              </h1>
             </div>
             {session ? (
               <div>
@@ -58,7 +74,7 @@ const NgReport = () => {
           </div>
           <hr className="my-3" />
           {session ? (
-            <div className="flex">
+            <div className="flex justify-end">
               <button
                 onClick={() => setIsModalAddNgOpen(true)}
                 className="btn btn-sm btn-primary shadow-md">
@@ -71,8 +87,8 @@ const NgReport = () => {
           ) : (
             ""
           )}
-          <div className="mt-2">
-            <table className="table border">
+          <div className="mt-2 overflow-x-auto ">
+            <table className="table table-xs border">
               <thead>
                 <tr>
                   <th className="text-center">No</th>
@@ -83,7 +99,7 @@ const NgReport = () => {
                   <th className="text-center">Jenis NG</th>
                   <th className="text-center">Tanggal</th>
                   <th className="text-center">Lampiran</th>
-                  {session ? <th className="text-center">Action</th> : ""}
+                  <th className="text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -96,7 +112,7 @@ const NgReport = () => {
                     <td className="text-center">{item.customer}</td>
                     <td className="text-center">{item.jenisNG}</td>
                     <td className="text-center">
-                      {format(Date(item.date), "dd/MM/yyyy")}
+                      {format(new Date(item.date), "dd/MM/yyyy")}
                     </td>
                     <td
                       onClick={() => {
@@ -131,7 +147,16 @@ const NgReport = () => {
                         </button>
                       </td>
                     ) : (
-                      ""
+                      <td className="text-center">
+                        <button
+                          onClick={() => exportToPdf(item.id)}
+                          className="btn btn-sm btn-outline me-3">
+                          <span>
+                            <FontAwesomeIcon icon={faFileExport} />
+                          </span>
+                          PDF
+                        </button>
+                      </td>
                     )}
                   </tr>
                 ))}
