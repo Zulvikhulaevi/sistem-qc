@@ -121,7 +121,7 @@ const NgReport = () => {
                       }}
                       className="cursor-pointer hover:bg-slate-300 flex justify-center">
                       <Image
-                        src={item.imageData.url}
+                        src={item.imageData?.url}
                         width={80}
                         height={80}
                         alt="attachment"
